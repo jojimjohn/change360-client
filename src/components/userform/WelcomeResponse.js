@@ -39,7 +39,7 @@ const WelcomeResponse = ({ userInfo, handleNext }) => {
             const response = await fetch(`https://change360-v1.herokuapp.com/api/users`, {
               method: 'POST',
               body: userInfo,
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 'Content-Type': 'application/json,' },
             });
         
             if (!response.ok) {
