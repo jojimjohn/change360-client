@@ -31,15 +31,16 @@ const WelcomeResponse = ({ userInfo, handleNext }) => {
       const fetchData = async () => {
         setIsLoading(true);
 
-
         try {
             // Send a POST request to the backend to save the user's dietary information
             // Get the welcome message from the OpenAI API
             //${process.env.REACT_APP_BASE_API_URL}
-            const response = await fetch(`https://change360-v1.herokuapp.com/api/users`, {
+            //https://change360-v1.herokuapp.com
+            //https://change360-v1.onrender.com/
+            const response = await fetch(`https://change360-v1.onrender.com/api/users`, {
               method: 'POST',
               body: userInfo,
-              headers: { 'Content-Type': 'application/json,' },
+              headers: { 'Content-Type': 'application/json' },
             });
         
             if (!response.ok) {

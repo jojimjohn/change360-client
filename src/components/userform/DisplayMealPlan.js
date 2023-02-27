@@ -37,7 +37,8 @@ const DisplayMealPlan = ({ userInfo, handleNext }) => {
             // Send a POST request to the backend to save the user's dietary information
             // Get the welcome message from the OpenAI API
             //${process.env.REACT_APP_BASE_API_URL}
-            const response = await fetch(`https://change360-v1.herokuapp.com/api/nutrition`, {
+            //https://change360-v1.onrender.com/
+            const response = await fetch(`https://change360-v1.onrender.com/api/nutrition`, {
               method: 'POST',
               body: userInfo,
               headers: { 'Content-Type': 'application/json' },
