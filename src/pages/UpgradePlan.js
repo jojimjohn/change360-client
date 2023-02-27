@@ -1,6 +1,4 @@
 import { Box, Button, Typography } from '@mui/material';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 
 const UpgradePlan = () => {
 
@@ -20,7 +18,6 @@ const UpgradePlan = () => {
 
   return (
     <>
-      <Header />
       <Box sx={{ p: 2 }}>
         <Typography variant="h5">Upgrade to 2 Additional Days Meal Plan</Typography>
         <Typography variant="subtitle1" color="text.secondary">
@@ -32,7 +29,6 @@ const UpgradePlan = () => {
           </Button>
         </Box>
       </Box>
-      <Footer />
     </>
   );
 };
