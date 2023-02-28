@@ -35,7 +35,7 @@ const DisplayMealPlan = ({ userInfo, handleNext }) => {
 
         try {
             // Send a POST request to the backend to save the user's dietary information
-            // Get the welcome message from the OpenAI API
+            // Get the meal plan from the OpenAI API
             //${process.env.REACT_APP_BASE_API_URL}
             //https://change360-v1.onrender.com/
             const response = await fetch(`https://change360-v1.onrender.com/api/nutrition`, {
