@@ -1,7 +1,8 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const PlanInfo = () => {
+//const PlanInfo = () => {
+const PlanInfo = ({ handleResponse }) => {
   const navigate = useNavigate();
 
   const handlePurchasePlan = () => {
@@ -21,6 +22,7 @@ const PlanInfo = () => {
         </Typography>
         <Box sx={{ mt: 2 }}>
           <Button variant="contained" color="primary" onClick={handlePurchasePlan}>
+          {/* <Button variant="contained" color="primary"  onClick={() => handleResponse('payment')}> */}
             Purchase Plan
           </Button>
         </Box>

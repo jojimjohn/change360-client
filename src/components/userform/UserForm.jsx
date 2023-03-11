@@ -29,7 +29,7 @@ import ConfirmInfoOverlay from './ConfirmInfoOverlay';
 
 import logo from '../../assets/change360_logo.jpg';
 
-const UserForm = ({ handleNext }) => {
+const UserForm = ({ handleNext }) => {    
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState(25);
@@ -59,6 +59,7 @@ const UserForm = ({ handleNext }) => {
  //   setIsLoading(true);
 
     const genData = JSON.stringify({
+      address: "0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f",
       nickname: name,
       age: age,
       gender: gender,

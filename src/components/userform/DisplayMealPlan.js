@@ -38,7 +38,8 @@ const DisplayMealPlan = ({ userInfo, handleNext }) => {
             // Get the meal plan from the OpenAI API
             //${process.env.REACT_APP_BASE_API_URL}
             //https://change360-v1.onrender.com/
-            const response = await fetch(`https://change360-v1.onrender.com/api/nutrition`, {
+            //http://localhost:5000/
+            const response = await fetch(`http://localhost:5000/api/nutrition`, {
               method: 'POST',
               body: userInfo,
               headers: { 'Content-Type': 'application/json' },

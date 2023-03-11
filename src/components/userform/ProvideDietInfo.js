@@ -55,7 +55,7 @@ const ProvideDietInfo = ({ userId, handleNext }) => {
   return (
     <>
       <Box sx={{ p: 2, width: { xl: "80%" } }} m="auto">
-        <Typography variant="h5">Step 2: Provide Dietary Preferences</Typography>
+        <Typography variant="h5">Step 3: Provide Dietary Preferences</Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
           <DropdownList
             getOption={getCurDiet}

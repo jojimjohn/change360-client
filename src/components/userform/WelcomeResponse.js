@@ -37,7 +37,8 @@ const WelcomeResponse = ({ userInfo, handleNext }) => {
             //${process.env.REACT_APP_BASE_API_URL}
             //https://change360-v1.herokuapp.com
             //https://change360-v1.onrender.com/
-            const response = await fetch(`https://change360-v1.onrender.com/api/users`, {
+            //http://localhost:5000/
+            const response = await fetch(`http://localhost:5000/api/users`, {
               method: 'POST',
               body: userInfo,
               headers: { 'Content-Type': 'application/json' },
