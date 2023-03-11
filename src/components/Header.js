@@ -11,12 +11,12 @@ const Header = () => {
         </Link>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="h6" sx={{ mr: 4 }}>
-            <Link to="/dashboard" style={{ textDecoration: 'none', color: '#FFF' }}>
+            <Link to="/" style={{ textDecoration: 'none', color: '#FFF' }}>
               Home
             </Link>
           </Typography>
           <Typography variant="h6">
-            <Link to="/plan-info" style={{ textDecoration: 'none', color: '#FFF' }}>
+            <Link to="/planinfo" style={{ textDecoration: 'none', color: '#FFF' }}>
               Purchase Plan
             </Link>
           </Typography>
