@@ -121,6 +121,58 @@ const UserInteract = ({address}) => {
       questionText = '';
   }
 
+  
+  const formatMessage = (message) => {
+    const sections = message.split('\n\n');
+  
+    return sections.map((section, index) => {
+      const lines = section.trim().split('\n');
+      const tableHeaders = lines[0].split('|').map((header) => header.trim());
+      const tableRows = lines.slice(2).map((row) => row.split('|').map((cell) => cell.trim()));
+  
+      if (tableRows.length > 0 && tableHeaders.length > 1) {
+        return (
+          <div key={index} style={{ backgroundColor: '#f1f1f1', padding: '16px' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead style={{ backgroundColor: '#e7e7e7' }}>
+                <tr>
+                  {tableHeaders.map((header) => (
+                    <th key={header} style={{ padding: '8px', border: '1px solid #ddd' }}>
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {tableRows.map((row, rowIndex) => (
+                  <tr key={rowIndex} style={{ backgroundColor: rowIndex % 2 === 0 ? '#f9f9f9' : 'white' }}>
+                    {row.map((cell, cellIndex) => (
+                      <td key={cellIndex} style={{ padding: '8px', border: '1px solid #ddd' }}>
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      } else {
+        return (
+          <div key={index} style={{ backgroundColor: '#f1f1f1', padding: '16px' }}>
+            <h3 style={{ margin: 0, marginBottom: '16px', color: '#2196f3' }}>{lines[0]}</h3>
+            {lines.slice(1).map((row, rowIndex) => (
+              <p key={rowIndex} style={{ margin: 0 }}>
+                {row}
+              </p>
+            ))}
+          </div>
+        );
+      }
+    });
+  };
+
+
   return (
     <ChatBox>
         <ChatHeader gutterBottom>
@@ -209,9 +261,7 @@ const UserInteract = ({address}) => {
            {response && (
          <Box sx={{ mt: 2 }}>
            <Typography variant="body2" color="text.secondary" component="p">
-           {response.message.split('\n\n').map((text, index) => (
-             <p key={index}>{text}</p>
-           ))}
+           {formatMessage(response.message)}
            </Typography>
        
     
