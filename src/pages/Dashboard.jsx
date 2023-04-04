@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { clearToken, setToken } from '../utils/auth';
 
 import { Link } from 'react-router-dom';
 
@@ -14,9 +13,8 @@ const Dashboard = ({ isLoggedIn }) => {
   const [mealPlan, setMealPlan] = useState(null); // TODO: check if the user has a plan
   const [user, setUser] = useState(null);
 
-  const token = localStorage.getItem('token');
-  const address = JSON.parse(localStorage.getItem('address')).address;
-
+ // const address = JSON.parse(localStorage.getItem('address')).address;
+  const address = '0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f';
   useEffect(() => {
 
     // Retrieve user information and preferences
@@ -47,19 +45,17 @@ const Dashboard = ({ isLoggedIn }) => {
   }, []);
 
   const handlePurchasePlan = () => {
-    navigate('/payment');
+    navigate('/user/01/buy');
   }
 
 
   return (
-    <Box sx={{ flexGrow: 1, p: 3 }}>
+    <Box sx={{ flexGrow: 1, p: 3, minHeight:500 }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h4" gutterBottom>
             Dashboard
           </Typography>
-
-          <Link to="/logout">Logout</Link>
           {mealPlan ? (
             <>
               <Typography variant="h6" gutterBottom>

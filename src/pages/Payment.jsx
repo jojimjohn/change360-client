@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
+import { addRewardPoints } from '../components/rewards/RewardsProvider';
+
 const Payment = () => {
-  return (
-    <>
+  useEffect(() => {
+    addRewardPoints('New User', 10);
+  }, []);
+
+   return (
       <Box sx={{ p: 10, width: { xl: '80%' }, minHeight: { xl: '500px'} }}>
         <Typography variant="h5">Plan Activated!</Typography>
         <Typography variant="subtitle1" color="text.secondary">
@@ -13,12 +19,11 @@ const Payment = () => {
           </Typography>
         </Box>
         <Box sx={{ mt: 2 }}>
-          <Button variant="contained" color="primary" size="large" href="/mealplan">
+          <Button variant="contained" color="primary" size="large" href="/mealplan/new">
             Generate Meal Plan
           </Button>
         </Box>
       </Box>
-    </>
   );
 };
 

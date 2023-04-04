@@ -1,0 +1,50 @@
+/* Plan card */
+.plan {
+  background-color: #222827;
+  float: left;
+  width: 100%;
+  padding: 0.75em;
+  border-radius: 1em;
+}
+
+/* Plan card outline */
+.plan-outline {
+  border-radius: 2em;
+}
+
+/* Style of the list */
+.plan-list {
+  background-color: #222827;
+  border: 1px solid #dfe2e1;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+}
+
+/* Add shadows on hover */
+.plan:hover {
+  box-shadow: 0 0px 8px 0 rgba(0,0,0,0.8)
+}
+
+/* Plan header */
+.plan-header {
+  background-color: #0072c6;
+  color: white;
+  font-size: 25px;
+  border-radius: 5px;
+}
+
+/* List items */
+.plan li {
+  border-bottom: 1px solid #dfe2e1;
+  padding: 1em;
+  text-align: center;
+}
+
+/* The "Sign Up" button */
+.plan-button {
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.25em;
+  border-radius: 2em;
+}

@@ -1,34 +1,62 @@
-const TOKEN_KEY = 'jwt_token';
+import { createContext, useContext, useState } from 'react';
+import { redirect } from 'react-router-dom';
 
-// Set JWT token in local storage
-export const setToken = (token) => {
-  localStorage.setItem(TOKEN_KEY, token);
+// Add AuthContext and AuthProvider
+const AuthContext = createContext(null);
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-// Clear JWT token from local storage
-export const clearToken = () => {
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+
+  return context;
+};
+
+export function getTokenDuration() {
+  const storedExpirationDate = localStorage.getItem('expiration');
+  const expirationDate = new Date(storedExpirationDate);
+  const now = new Date();
+  const duration = expirationDate.getTime() - now.getTime();
+  return duration;
+}
+
+export function getAuthToken() {
   const token = localStorage.getItem('token');
-  localStorage.removeItem('token');
-};
 
-// Get JWT token from local storage
-export const getToken = () => {
-  return localStorage.getItem(TOKEN_KEY);
-};
-
-// Verify JWT token
-export const verifyToken = () => {
-  const token = getToken();
-
-  if (token) {
-    try {
-      const decoded = jwt.verify(token, 'secret_key');
-      return decoded;
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
-  } else {
+  if (!token) {
     return null;
   }
-};
+
+  const tokenDuration = getTokenDuration();
+
+  if (tokenDuration < 0) {
+    return 'EXPIRED';
+  }
+
+  return token;
+}
+
+export function tokenLoader() {
+  const token = getAuthToken();
+  return token;
+}
+
+export function checkAuthLoader() {
+  const token = getAuthToken();
+  console.log(token);
+  if (!token) {
+    return redirect('/auth');
+  }
+}

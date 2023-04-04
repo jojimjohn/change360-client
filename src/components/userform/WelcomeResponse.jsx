@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const WelcomeResponse = ({ userInfo, handleNext }) => {
+const WelcomeResponse = ({ userInfo, handleNext, apiUrl  }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
@@ -35,10 +35,7 @@ const WelcomeResponse = ({ userInfo, handleNext }) => {
             // Send a POST request to the backend to save the user's dietary information
             // Get the welcome message from the OpenAI API
             //${process.env.REACT_APP_BASE_API_URL}
-            //https://change360-v1.herokuapp.com
-            //https://change360-v1.onrender.com/
-            //http://localhost:5000/
-            const response = await fetch(`http://localhost:5000/api/users`, {
+            const response = await fetch(`${apiUrl}/users`, {
               method: 'POST',
               body: userInfo,
               headers: { 'Content-Type': 'application/json' },

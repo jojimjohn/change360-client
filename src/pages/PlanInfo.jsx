@@ -6,7 +6,7 @@ const PlanInfo = ({ handleResponse }) => {
   const navigate = useNavigate();
 
   const handlePurchasePlan = () => {
-    navigate('/payment');
+    navigate('/user/01/buy');
   }
 
   return (

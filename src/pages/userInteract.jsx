@@ -82,7 +82,7 @@ const UserInteract = ({address}) => {
       try {
              //https://change360-v1.onrender.com/
             //http://localhost:5000/
-         const aiResponse = await axios.post('http://localhost:5000/api/ai', jsonData);
+         const aiResponse = await axios.post('https://change360-v1.onrender.com/api/ai', jsonData);
        
        console.log(aiResponse.data);
        // setResponses([...responses, { question: "AI's Response", response: aiResponse.data }]);

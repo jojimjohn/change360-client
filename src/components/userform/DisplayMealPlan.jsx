@@ -13,7 +13,14 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const DisplayMealPlan = ({ userInfo, handleNext }) => {
+import { addRewardPoints } from '../../components/rewards/RewardsProvider';
+
+const DisplayMealPlan = ({ userInfo, handleNext, apiUrl  }) => {
+
+  useEffect(() => {
+    addRewardPoints('Meal Plan', 20);
+  }, []);
+
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
@@ -36,10 +43,7 @@ const DisplayMealPlan = ({ userInfo, handleNext }) => {
         try {
             // Send a POST request to the backend to save the user's dietary information
             // Get the meal plan from the OpenAI API
-            //${process.env.REACT_APP_BASE_API_URL}
-            //https://change360-v1.onrender.com/
-            //http://localhost:5000/
-            const response = await fetch(`http://localhost:5000/api/nutrition`, {
+            const response = await fetch(`${apiUrl}/nutrition`, {
               method: 'POST',
               body: userInfo,
               headers: { 'Content-Type': 'application/json' },
