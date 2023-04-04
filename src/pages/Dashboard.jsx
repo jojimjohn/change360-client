@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 
-import UserInteract from '../pages/userInteract';
+import UserInteract from './userInteract';
 
 const Dashboard = ({ isLoggedIn }) => {
   const navigate = useNavigate();

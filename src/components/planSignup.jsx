@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import PlanInfo from '../pages/PlanInfo';
 
-import GeneralInfo from '../components/userform/UserForm';
+import GeneralInfo from './userform/UserForm';
 
 const PlanSignup = ({ userStatus, handleResponse }) => {
     console.log("plansignup");

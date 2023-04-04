@@ -1,8 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { Box } from '@mui/material';
 import ErrorPage from './pages/Error';
+
+import 'aos/dist/aos.css';
+import './css/style.css';
+
+import AOS from 'aos';
+
 
 //Homepage
 import Homepage from './pages/Home';
@@ -29,7 +35,7 @@ import { RewardPointsProvider } from './components/rewards/RewardsProvider';
 //import ProvideDietInfo from './components/userform/ProvideDietInfo';
 import UpgradePlan from './pages/UpgradePlan';
 import AdditionalPlan from './pages/AdditionalPlan';
-import Logout from './pages/Logout';
+//import Logout from './pages/Logout';
 
 import AuthenticationPage, {
   action as authAction,
@@ -124,6 +130,24 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      disable: 'phone',
+      duration: 600,
+      easing: 'ease-out-sine',
+    });
+  });
+
+  useEffect(() => {
+    document.querySelector('html').style.scrollBehavior = 'auto'
+    window.scroll({ top: 0 })
+    document.querySelector('html').style.scrollBehavior = ''
+  }, [location.pathname]); // triggered on route change
+
+
+
   return <RouterProvider router={router} />;
 }
 

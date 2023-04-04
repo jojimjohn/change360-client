@@ -6,10 +6,8 @@ function RootLayout() {
 
   return (
     <>
-      <main>
         {/* {navigation.state === 'loading' && <p>Loading...</p>} */}
         <Outlet />
-      </main>
     </>
   );
 }

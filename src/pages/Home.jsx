@@ -11,13 +11,13 @@ import Testimonials from '../partials/Testimonials';
 import Newsletter from '../partials/Newsletter';
 import Footer from '../partials/Footer';
 
-import PageContent from '../components/PageContent';
+//import PageContent from '../components/PageContent';
 
 function Home() {
   return (
     <>
-    <MainNavigation />
-    <PageContent title="C.H.A.N.G.E. 360">
+    {/* <PageContent title="C.H.A.N.G.E. 360">
+    </PageContent> */}
       <div className="flex flex-col min-h-screen overflow-hidden">
         {/*  Site header */}
         <Header />
@@ -42,7 +42,7 @@ function Home() {
         {/*  Site footer */}
         <Footer />
       </div>
-    </PageContent>
+
     </>
   );
 }
