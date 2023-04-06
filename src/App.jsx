@@ -37,6 +37,10 @@ import UpgradePlan from './pages/UpgradePlan';
 import AdditionalPlan from './pages/AdditionalPlan';
 //import Logout from './pages/Logout';
 
+//Admin pages
+import AdminFeedback from './admin/feedback'
+
+
 import AuthenticationPage, {
   action as authAction,
 } from './pages/Authentication';
@@ -54,7 +58,7 @@ const router = createBrowserRouter([
     id: 'root',
     loader: tokenLoader,
     children: [
-      { index: true, element: <Homepage /> },
+      { index: true, element: <Homepage /> },  
       {
         path: 'user',
         id: 'user',
@@ -62,14 +66,14 @@ const router = createBrowserRouter([
           // <AuthProvider>
           //   <UserRootLayout />
           // </AuthProvider>
-          <UserRootLayout />
+          <UserRootLayout userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} />
         ), 
         children: [
           {
             index: true,
-            element: <Dashboard />,
+            element: <Dashboard apiUrl={apiUrl}/>,
          //   loader: checkAuthLoader,
-          },
+          },  
           {
             path: 'plans',
             element: <PlanInfo />,
@@ -107,7 +111,7 @@ const router = createBrowserRouter([
           {
             index: true,
            path: 'new',
-           element: <NewPlanPage />,
+           element: <NewPlanPage userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} />,
         //    action: manipulateBuyAction,
           },
           // {
@@ -125,6 +129,9 @@ const router = createBrowserRouter([
         path: 'logout',
         action: logoutAction,
       },
+      { 
+        path: 'admin/feedback',
+        element: <AdminFeedback apiUrl={apiUrl} /> },
     ],
   },
 ]);

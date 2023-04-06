@@ -8,12 +8,8 @@ import DisplayMealPlan from '../components/userform/DisplayMealPlan';
 import { RewardPointsProvider } from '../components/rewards/RewardsProvider';
 
 const steps = ['General Information', 'Welcome Response', 'Dietary Information', 'Your Meal Plan'];
-const apiUrl = 'https://change360-v1.onrender.com/api';
-//http://localhost:5000/api
-//https://change360-v1.onrender.com
-//${process.env.REACT_APP_BASE_API_URL}
 
-const NewPlan = () => {
+const NewPlan = ({ userId, apiUrl }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [responseData, setResponse] = useState(null);
 
@@ -40,7 +36,7 @@ const NewPlan = () => {
       case 2:
         return <ProvideDietInfo userId={responseData}  handleNext={handleNext} />;
       case 3:
-        return  <RewardPointsProvider userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} >
+        return  <RewardPointsProvider userId={userId} apiUrl={apiUrl} >
                   <DisplayMealPlan userInfo={responseData}  handleNext={handleNext} apiUrl={apiUrl} />
                 </RewardPointsProvider>;
       default:

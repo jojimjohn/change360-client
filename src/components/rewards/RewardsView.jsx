@@ -8,7 +8,7 @@ const RewardsView = () => {
   const styles = {
     root: {
       padding: '24px',
-      backgroundColor: '#F7F7F7',
+     
     },
     header: {
       display: 'flex',
@@ -35,6 +35,8 @@ const RewardsView = () => {
     },
     table: {
       border: '1px solid #E0E0E0',
+      backgroundColor: '#F7F7F7',
+      width: '80%'
     },
     tableHeader: {
       backgroundColor: '#E0E0E0',
@@ -42,7 +44,7 @@ const RewardsView = () => {
     },
     tableRow: {
       '&:hover': {
-        backgroundColor: '#F7F7F7',
+        backgroundColor: '#F0F0F0',
       },
     },
     noRewards: {

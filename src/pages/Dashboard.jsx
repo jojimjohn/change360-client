@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import UserInteract from './userInteract';
 
-const Dashboard = ({ isLoggedIn }) => {
+const Dashboard = ({ isLoggedIn, apiUrl }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [mealPlan, setMealPlan] = useState(null); // TODO: check if the user has a plan
@@ -21,9 +21,7 @@ const Dashboard = ({ isLoggedIn }) => {
     const fetchUser = async () => {
       try {
 
-        //https://change360-v1.onrender.com/
-        //http://localhost:5000/
-        const response = await axios.get(`http://localhost:5000/api/users/auth/${address}`);
+        const response = await axios.get(`${apiUrl}/users/auth/${address}`);
 
         const userInfo = response.data.userInfo ;
         setUser(userInfo); // Set the user state variable with the response data
@@ -62,7 +60,7 @@ const Dashboard = ({ isLoggedIn }) => {
                 Your Meal and Nutrition Plans
               </Typography>
               <Box sx={{ mb: 3 }}>
-                <UserInteract address={address} />
+                <UserInteract address={address} apiUrl={apiUrl}/>
               </Box>
               {/* TODO: display the user's meal and nutrition plans */}
             </>

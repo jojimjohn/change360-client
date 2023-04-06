@@ -14,7 +14,7 @@ import {
   } from "@mui/material";
 import axios from 'axios';
 
-const UserInteract = ({address}) => {
+const UserInteract = ({address, apiUrl }) => {
   const [questionNum, setQuestionNum] = useState(1);
   const [responses, setResponses] = useState([]);
   const [showTextBox, setShowTextBox] = useState(true);
@@ -44,7 +44,16 @@ const UserInteract = ({address}) => {
   
   const ChatInput = styled(TextField)({
     marginBottom: '1rem',
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#e7e7e7',
+      },
+      '& .MuiOutlinedInput-input': {
+        color: 'white',
+      },
+    },
   });
+  
   
   const ChatButton = styled(Button)({
     marginTop: '1rem',
@@ -54,7 +63,6 @@ const UserInteract = ({address}) => {
 
   const handleNext = async () => {    
     const response = document.getElementById('response').value;
-   // setResponses([...responses, { question: questionText, response }]);
     document.getElementById('response').value = '';
             
     if (questionNum <= 4) {
@@ -80,9 +88,7 @@ const UserInteract = ({address}) => {
       console.log(jsonData);
    
       try {
-             //https://change360-v1.onrender.com/
-            //http://localhost:5000/
-         const aiResponse = await axios.post('https://change360-v1.onrender.com/api/ai', jsonData);
+       const aiResponse = await axios.post(`${apiUrl}/ai`, jsonData);
        
        console.log(aiResponse.data);
        // setResponses([...responses, { question: "AI's Response", response: aiResponse.data }]);

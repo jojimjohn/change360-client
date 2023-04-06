@@ -4,11 +4,11 @@ import { Outlet, useLoaderData, useSubmit } from 'react-router-dom';
 
 import { getTokenDuration } from '../utils/auth';
 
+import FeedbackModal from "../components/feedback/FeedbackModal";
 
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 
-const UserRootLayout = () => {
+const UserRootLayout = ({ userId, apiUrl }) => {
   const token = useLoaderData();
   const submit = useSubmit();
 
@@ -35,7 +35,7 @@ const UserRootLayout = () => {
     <>
       <Header />
            <Outlet />
-      {/* <Footer /> */}
+           <FeedbackModal userId={userId} apiUrl={apiUrl} />
     </>
   );
 };

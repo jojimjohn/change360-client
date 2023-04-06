@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Typography } from '@mui/material';
 
-const WelcomeScreen = ({ connectWallet }) => {
+const WelcomeScreen = ({ connectWallet, apiUrl }) => {
 
   const [error, setError] = useState(null);
 
@@ -14,10 +14,7 @@ const WelcomeScreen = ({ connectWallet }) => {
 
       try {
           // Send a POST request to verify user
-          //${process.env.REACT_APP_BASE_API_URL}
-          //https://change360-v1.onrender.com/
-          //http://localhost:5000/
-          const response = await fetch(`http://localhost:5000/api/login`, {
+          const response = await fetch(`${apiUrl}/login`, {
             method: 'POST',
             body: address,
             headers: { 'Content-Type': 'application/json' },
