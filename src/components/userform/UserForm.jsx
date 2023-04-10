@@ -27,7 +27,7 @@ import * as constants from "./Constants";
 
 import ConfirmInfoOverlay from './ConfirmInfoOverlay';
 
-import logo from '../../assets/change360_logo.jpg';
+import logo from '../../images/logo.png';
 
 const UserForm = ({ handleNext }) => {    
   const [name, setName] = useState("");

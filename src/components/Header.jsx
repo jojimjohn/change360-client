@@ -1,6 +1,6 @@
 import { Form, NavLink, useRouteLoaderData } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Box } from '@mui/material';
-import logo from '../assets/change360_logo.jpg';
+import logo from '../images/logo.png';
 
 const Header = () => {
   const token = useRouteLoaderData('root');
@@ -9,7 +9,7 @@ const Header = () => {
     <AppBar position="static" sx={{ bgcolor: '#000' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <NavLink to="/">
-          <img src={logo} alt="Logo" width="80" />
+          <img src={logo} alt="Logo" width="128" style={{marginTop: '8px', marginBottom: '8px'}} />
         </NavLink>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="h6" sx={{ mr: 4 }}>
