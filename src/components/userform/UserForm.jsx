@@ -27,7 +27,7 @@ import * as constants from "./Constants";
 
 import ConfirmInfoOverlay from './ConfirmInfoOverlay';
 
-import logo from '../../images/logo.png';
+import backgroundLogo from '../../images/logo-semi-transparent.png';
 
 const UserForm = ({ handleNext }) => {    
   const [name, setName] = useState("");
@@ -115,9 +115,9 @@ const UserForm = ({ handleNext }) => {
   return (
     <>
     <Box sx={{ p: 2, width: { xl: '80%' }  }} m="auto">
-        <Typography variant="h5">Step 1: Provide General Information</Typography>
-     <Box component="form" onSubmit={submitHandler} sx={{ mt: 2 }}>
-        <Grid container item flexDirection={"column"}>
+        <Typography variant="h5" className="text-center">Step 1: Provide General Information</Typography>
+     <Box component="form" onSubmit={submitHandler} sx={{ mt: 2, backgroundImage: `url(${backgroundLogo})`, backgroundPosition: `center center`, backgroundRepeat: "no-repeat", backgroundSize: "contain" }}>
+        <Grid container item flexDirection={"column"} alignItems="center">
           <TextField sx={{ width: 200 }} value={name} onChange={(e) => {setName(e.target.value); }} label="Name"  variant="standard" />
           <Grid item sx={{ marginTop: 1.5 }}>
             <Typography gutterBottom> Gender </Typography>
@@ -165,10 +165,12 @@ const UserForm = ({ handleNext }) => {
             useList={constants.dailyActivities}
           />
         </Grid>
-
-      <Button type="submit" variant="contained" color="primary" sx={{ width: 100 }}  disabled={isLoading || response != null} >
-      {isLoading ? <CircularProgress size={24} /> : 'Submit'}
-      </Button>
+      <br />
+      <Box textAlign='center'>
+        <Button type="submit" variant="contained" disabled={isLoading || response != null} color="primary" style={{ fontSize: "1.5em" }}>
+        {isLoading ? <CircularProgress size={24} /> : 'Get Started'}
+        </Button>
+      </Box>
       {showOverlay && (
           <ConfirmInfoOverlay
             name={name}
