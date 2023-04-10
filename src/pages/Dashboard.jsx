@@ -48,15 +48,15 @@ const Dashboard = ({ isLoggedIn, apiUrl }) => {
 
 
   return (
-    <Box sx={{ flexGrow: 1, p: 3, minHeight:500 }}>
+    <Box className="relative max-w-6xl mx-auto h-0" sx={{ flexGrow: 1, p: 3, minHeight:500 }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h4" gutterBottom className="text-center">
             Dashboard
           </Typography>
           {mealPlan ? (
             <>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom className="text-center">
                 Your Meal and Nutrition Plans
               </Typography>
               <Box sx={{ mb: 3 }}>
