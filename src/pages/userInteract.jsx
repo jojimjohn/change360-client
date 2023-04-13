@@ -8,6 +8,7 @@ import {
     CardContent,
     Typography,
     TextField,
+    TextareaAutosize,
     Skeleton,
     Avatar,
     styled
@@ -40,21 +41,16 @@ const UserInteract = ({address, apiUrl }) => {
   
   const ChatResponse = styled(Typography)({
     fontSize: '1.2rem',
+    whiteSpace: 'pre-wrap',
   });
   
-  const ChatInput = styled(TextField)({
-    marginBottom: '1rem',
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#e7e7e7',
-      },
-      '& .MuiOutlinedInput-input': {
-        color: 'white',
-      },
-    },
+  const ChatInput = styled(TextareaAutosize)({
+    backgroundColor: 'black',
+    color: 'white',
+    resize: 'vertical',
+    width: '100%',
   });
-  
-  
+
   const ChatButton = styled(Button)({
     marginTop: '1rem',
   });
@@ -63,6 +59,11 @@ const UserInteract = ({address, apiUrl }) => {
 
   const handleNext = async () => {    
     const response = document.getElementById('response').value;
+
+    if (response <= 1) {
+      return // Do not allow empty response
+    }
+
     document.getElementById('response').value = '';
             
     if (questionNum <= 4) {
@@ -104,8 +105,8 @@ const UserInteract = ({address, apiUrl }) => {
   };
 
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-        handleNext();
+    if (event.key === 'Enter' && event.ctrlKey) {
+      handleNext();
     }
   };
 
