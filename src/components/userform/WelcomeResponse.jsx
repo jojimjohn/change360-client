@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
+import logo from '../../images/logo.png';
+
 const WelcomeResponse = ({ userInfo, handleNext, apiUrl  }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(null);
@@ -69,21 +71,21 @@ const WelcomeResponse = ({ userInfo, handleNext, apiUrl  }) => {
   }, [userInfo]);
 
   return (
-    <Box sx={{ p: 2, width: { xl: "80%" } }} m="auto">
-      <Typography variant="h5">Step 2: Welcome Response</Typography>
+    <Box className="relative max-w-6xl mx-auto h-0" textAlign='center' m="auto">
+      <Typography variant="h5" className="text-center">Step 2: Welcome Response</Typography>
       <Box component="form" onSubmit={submitHandler} sx={{ mt: 2 }}>
        
       {isLoading || response != null || error != null? (
 
-<Card sx={{ maxWidth: '80%', m: 2 }}>
+<Card sx={{ m: 2 }}>
    <CardHeader
    sx={{
      display: 'flex',
      alignItems: 'center',
      justifyContent: 'space-between',
      p: 2,
-     bgcolor: '#f5f5f5',
-     borderBottom: '1px solid #ccc',
+     bgcolor: '#0072c6',
+     borderBottom: '1px solid #dfe2e1',
    }}
    avatar={
      isLoading ? (
@@ -95,9 +97,9 @@ const WelcomeResponse = ({ userInfo, handleNext, apiUrl  }) => {
        />
      ) : (
        <Avatar
-         alt="Change 360"
-         src="../../assets/logo_small.jpg"
-         sx={{ mr: 2 }}
+         alt="C.H.A.N.G.E. 360"
+         src={logo}
+         sx={{ width: '40px', height: '40px', borderRadius: '0.2rem' }}
        >
          C
        </Avatar>
@@ -112,7 +114,7 @@ const WelcomeResponse = ({ userInfo, handleNext, apiUrl  }) => {
          style={{ marginBottom: 6 }}
        />
      ) : (
-       <Typography variant="h6">Change 360</Typography>
+       <Typography variant="h6">C.H.A.N.G.E. 360</Typography>
      )
    }
  />
@@ -126,17 +128,19 @@ const WelcomeResponse = ({ userInfo, handleNext, apiUrl  }) => {
      <>
        {error && <Typography color="error">{error}</Typography>}
        {response && (
-     <Box sx={{ mt: 2 }}>
-       <Typography variant="body2" color="text.secondary" component="p">
+     <Box textAlign='justify' sx={{ mt: 2 }}>
+       <Typography variant="body2" color="white" component="p">
        {response.message.split('\n\n').map((text, index) => (
-         <p key={index}>{text}</p>
+         <p key={index} style={{marginTop: '1em', marginBottom: '1em'}}>{text}</p>
        ))}
        </Typography>
    
-    
-           <Button type="submit" variant="contained" color="primary">
+         <br/>
+         <Box textAlign='center'>
+           <Button type="submit" variant="contained" style={{ backgroundColor: "#bf5e38", color: "#ffffff", fontSize: "1em" }}>
              Next - Provide Diet and Nutrition Info
            </Button>
+         </Box>
 
      </Box>    
      )}

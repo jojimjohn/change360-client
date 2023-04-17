@@ -35,16 +35,15 @@ const RewardsView = () => {
     },
     table: {
       border: '1px solid #E0E0E0',
-      backgroundColor: '#F7F7F7',
-      width: '80%'
+      backgroundColor: '#222827',
     },
     tableHeader: {
-      backgroundColor: '#E0E0E0',
+      backgroundColor: '#0072c6',
       fontWeight: 'bold',
     },
     tableRow: {
       '&:hover': {
-        backgroundColor: '#F0F0F0',
+        backgroundColor: '#854127',
       },
     },
     noRewards: {
@@ -54,15 +53,15 @@ const RewardsView = () => {
   };
 
   return (
-    <Box sx={styles.root}>
+    <Box className="relative max-w-6xl mx-auto h-0" sx={styles.root}>
       <Box sx={styles.header}>
         <Box>
-          <Typography variant="h1" sx={styles.title}>
+          <Typography variant="h1" sx={styles.title}  className="text-center">
             Reward Points
           </Typography>
         </Box>
         <Box>
-          <Typography variant="body1" sx={styles.subheading}>
+          <Typography variant="body1" sx={styles.subheading} className="text-justify">
           Change360's Reward Points system is a way to show our appreciation for our users' loyalty and contributions to our platform. 
           With each action taken on the app, you can earn points that can be redeemed for rewards (coming soon). 
           Keep track of your progress and rewards claimed on the Reward Points page, where you can see your total points earned, as well as a detailed list of your claimed rewards. 
@@ -71,8 +70,9 @@ const RewardsView = () => {
         </Box>
       </Box>
       <Divider />
+      <br />
       <Box sx={styles.section}>
-        <Typography variant="h2" sx={styles.sectionTitle}>
+        <Typography variant="h2" sx={styles.sectionTitle} className="text-center">
          Your Reward Details
         </Typography>
         <Typography variant="subtitle1" sx={styles.subheading}>
