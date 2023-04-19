@@ -59,3 +59,7 @@ input {
   border:1px;
   border-color: #1976d2;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
