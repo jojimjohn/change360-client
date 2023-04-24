@@ -9,7 +9,6 @@ import './css/style.css';
 
 import AOS from 'aos';
 
-
 //Homepage
 import Homepage from './pages/Home';
 //Main root

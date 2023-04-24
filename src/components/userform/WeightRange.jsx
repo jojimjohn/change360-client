@@ -73,7 +73,7 @@ const SlidingRange = (props) => {
                         onChange={handleSliderChange}
                         aria-labelledby="input-slider"
                         step={1}
-                        marks="marks"
+                        marks
                         min={min}
                         max={max}/>
                 </Grid>
