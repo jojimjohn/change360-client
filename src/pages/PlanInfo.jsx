@@ -4,41 +4,48 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import UserInteract from './userInteract';
 
-//const PlanInfo = () => {
+import {useWallet} from "../components/walletconnect/WalletContext";
+
+
 const PlanInfo = ({ handleResponse, apiUrl }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [mealPlan, setMealPlan] = useState(null); // TODO: check if the user has a plan
   const [user, setUser] = useState(null);
 
-  // const address = JSON.parse(localStorage.getItem('address')).address;
-  const address = '0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f';
-  useEffect(() => {
+    const {
+        walletAddress
+    } = useWallet();
 
+  // const address = JSON.parse(localStorage.getItem('address')).address;
+  //const address = '0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f';
+  useEffect(() => {
+    setMealPlan(walletAddress); // TEMP storing some value - correct it
     // Retrieve user information and preferences
     const fetchUser = async () => {
       try {
 
-        const response = await axios.get(`${apiUrl}/users/auth/${address}`);
+        // const response = await axios.get(`${apiUrl}/users/auth/${walletAddress}`);
 
-        const userInfo = response.data.userInfo ;
-        setUser(userInfo); // Set the user state variable with the response data
+        // const userInfo = response.data.userInfo ;
+        // setUser(userInfo); // Set the user state variable with the response data
 
-        setMealPlan(address); // TEMP storing some value - correct it
-        setError(null);
+    
+        // setError(null);
 
 
       } catch (error) {
             setError(error.message);
             console.error(error);
-        }
-
+       }
 
     };
 
     fetchUser();
+  
   }, []);
   
+
   const handlePurchasePlan = () => {
     navigate('/user/01/buy');
   }
@@ -47,7 +54,7 @@ const PlanInfo = ({ handleResponse, apiUrl }) => {
 
     <Container maxWidth="lg" sx={{ marginTop: '100px' }}>
     <Typography variant="h4" gutterBottom>
-      Meal Plans
+      Meal Plans 
     </Typography>
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -59,7 +66,7 @@ const PlanInfo = ({ handleResponse, apiUrl }) => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Box sx={{ mb: 3 }} style={{ marginTop: '30px' }}>
-                  <UserInteract address={address} apiUrl={apiUrl} />
+                  <UserInteract address={walletAddress} apiUrl={apiUrl} />
                 </Box>
               </Grid>
             </Grid>
