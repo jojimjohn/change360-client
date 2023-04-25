@@ -3,8 +3,6 @@ import { Box, Button, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
-
 import UserInteract from './userInteract';
 
 const Dashboard = ({ isLoggedIn, apiUrl }) => {

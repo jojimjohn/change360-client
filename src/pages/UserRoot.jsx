@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useLoaderData, useSubmit } from 'react-router-dom';
 
 import { getTokenDuration } from '../utils/auth';
@@ -7,10 +7,18 @@ import { getTokenDuration } from '../utils/auth';
 import FeedbackModal from "../components/feedback/FeedbackModal";
 
 import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
 
 const UserRootLayout = ({ userId, apiUrl }) => {
   const token = useLoaderData();
   const submit = useSubmit();
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
 
   useEffect(() => {
     if (!token) {
@@ -33,7 +41,8 @@ const UserRootLayout = ({ userId, apiUrl }) => {
 
   return (
     <>
-      <Header />
+      <Header onMenuClick={handleMenuClick} />
+      <Sidebar />
            <Outlet />
            <FeedbackModal userId={userId} apiUrl={apiUrl} />
     </>

@@ -2,10 +2,11 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { InjectedConnector } from "@web3-react/injected-connector";
-import PaymentABI from "../abi.json";
+import PaymentABI from "../../contracts/abi.json";
 import { USDT_TOKEN_ADDRESS, CONTRACT_ADDRESS, BSC_TESTNET_CHAIN_ID } from "./constants";
 import { usdtInterface } from "./utils";
 import { toast } from "react-toastify";
+import { CompressOutlined } from "@mui/icons-material";
 
 const WalletContext = createContext();
 
@@ -14,25 +15,86 @@ const injectedConnector = new InjectedConnector({
 });
 
 export const WalletProvider = ({ children }) => {
-  const [walletAddress, setWalletAddress] = useState(null);
+  const [walletAddress, setWalletAddress] = useState(localStorage.getItem("walletAddress"));
   const { active, account, library, activate, deactivate } = useWeb3React();
   const [isTokenApproved, setIsTokenApproved] = useState(false);
+
+  const [bnbBalance, setBNBBalance] = useState(localStorage.getItem("bnbBalance") || 0);
+  const [usdtBalance, setUSDTBalance] = useState(localStorage.getItem("usdtBalance") || 0);
+  const [bnbPrice, setBNBPrice] = useState(localStorage.getItem("bnbPrice") || 0);
+  
+    const erc20Abi = [
+      // Some ERC20 functions
+      "function balanceOf(address owner) view returns (uint256)",
+      "function decimals() view returns (uint8)"
+    ];
 
   useEffect(() => {
     if (walletAddress) {
       checkApproval(true); // Pass true to automatically approve the token
+    //  fetchBalancesAndPrice();
+    handleConnect();
     }
   }, [walletAddress]); 
 
+  
   useEffect(() => {
     if (library) {
+      handleConnect();
       const signer = library.getSigner();
       signer.getAddress().then((address) => {
         setWalletAddress(address);
         localStorage.setItem("walletAddress", address);
+        fetchBalancesAndPrice();
+        fetchBNBPrice();
       });
+
     }
   }, [library]);
+
+  useEffect(() => {
+    handleChkNetwork();
+   // fetchBalancesAndPrice();
+  }, [active]);
+  
+  useEffect(() => {
+   // fetchBalancesAndPrice();
+  }, [account]);
+  
+  
+  const fetchBNBPrice = async () => {
+    try {
+      const response = await fetch(
+        "https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT"
+      );
+      const data = await response.json();
+      setBNBPrice(parseFloat(data.price).toFixed(2));
+
+      return data.price;
+    } catch (error) {
+      console.error("Failed to fetch BNB price:", error);
+    }
+  };
+  
+  const fetchBalancesAndPrice = async () => {
+    if (!active || !walletAddress) {
+      return;
+    }
+  
+    // Fetch BNB balance
+    const bnbBalance = await library.getBalance(walletAddress);
+    setBNBBalance(ethers.utils.formatEther(bnbBalance));
+
+
+    // Fetch USDT balance
+    const signer = library.getSigner();
+    const usdtContract = new ethers.Contract(USDT_TOKEN_ADDRESS, erc20Abi, signer);
+    const usdtBalance = await usdtContract.balanceOf(walletAddress);
+    setUSDTBalance(ethers.utils.formatUnits(usdtBalance, 18)); 
+  
+    // Fetch BNB price
+    const bnbPrice = await fetchBNBPrice();
+  };
   
 
   const checkApproval = async (autoApprove = false) => {
@@ -138,6 +200,28 @@ export const WalletProvider = ({ children }) => {
     }    
   };
 
+  
+  const handleChkNetwork = async () => {
+    try {
+    const provider = await window.ethereum;
+    if (provider) {
+
+      window.ethereum.on('chainChanged', (chainId) => {
+        window.location.reload()
+      })
+
+      const networkId = await provider.request({ method: 'net_version' });
+      if (Number(networkId) !== 97) { // Check if network is BSC Testnet
+        handleDisconnect();
+        toast.error("Incorrect network");
+      }
+    }
+
+  } catch (error) {
+    console.error("Failed to connect:", error);
+  }
+};
+
   const handleConnect = async () => {
       try {
       if (!active) {
@@ -152,25 +236,31 @@ export const WalletProvider = ({ children }) => {
           toast.error("Incorrect network");
         }
       }
-
-      // if (library) {
-      //   console.log('dsf');
-      //   const signer = library.getSigner();
-      //   const address = await signer.getAddress();
-      //   setWalletAddress(address);
-      //   localStorage.setItem("walletAddress", address);
-      // }
+      fetchBalancesAndPrice();
     } catch (error) {
       console.error("Failed to connect:", error);
     }
   };
-  
+
 
   const handleDisconnect = () => {
     deactivate();
     setWalletAddress(null);
+    setBNBBalance(0);
+    setUSDTBalance(0);
+    setBNBPrice(0);
     localStorage.removeItem("walletAddress");
+    localStorage.removeItem("bnbBalance");
+    localStorage.removeItem("usdtBalance");
+    localStorage.removeItem("bnbPrice");
   };
+
+  function shortenAddress(address, chars = 4) {
+    if (!address) return '';
+    const beginning = address.slice(0, chars + 2);
+    const ending = address.slice(-chars);
+    return `${beginning}...${ending}`;
+  }
 
   return (
     <WalletContext.Provider
@@ -184,7 +274,11 @@ export const WalletProvider = ({ children }) => {
       handleDisconnect,
       approveToken,
       removeApproval,
-      active
+      active,
+      bnbBalance,
+      usdtBalance,
+      bnbPrice,
+      shortenAddress
     }}
     
     >
