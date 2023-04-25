@@ -3,7 +3,7 @@ import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import PaymentABI from "../../contracts/abi.json";
-import { USDT_TOKEN_ADDRESS, CONTRACT_ADDRESS, BSC_TESTNET_CHAIN_ID } from "./constants";
+import { USDT_TOKEN_ADDRESS, CONTRACT_ADDRESS, BSC_CHAIN_ID } from "./constants";
 import { usdtInterface } from "./utils";
 import { toast } from "react-toastify";
 import { CompressOutlined } from "@mui/icons-material";
@@ -11,7 +11,7 @@ import { CompressOutlined } from "@mui/icons-material";
 const WalletContext = createContext();
 
 const injectedConnector = new InjectedConnector({
-  supportedChainIds: [BSC_TESTNET_CHAIN_ID],
+  supportedChainIds: [BSC_CHAIN_ID],
 });
 
 export const WalletProvider = ({ children }) => {
@@ -211,7 +211,7 @@ export const WalletProvider = ({ children }) => {
       })
 
       const networkId = await provider.request({ method: 'net_version' });
-      if (Number(networkId) !== 97) { // Check if network is BSC Testnet
+      if (Number(networkId) !== BSC_CHAIN_ID) { 
         handleDisconnect();
         toast.error("Incorrect network");
       }
@@ -231,7 +231,7 @@ export const WalletProvider = ({ children }) => {
       const provider = await window.ethereum;
       if (provider) {
         const networkId = await provider.request({ method: 'net_version' });
-        if (Number(networkId) !== 97) { // Check if network is BSC Testnet
+        if (Number(networkId) !== BSC_CHAIN_ID) { 
           handleDisconnect();
           toast.error("Incorrect network");
         }
