@@ -5,7 +5,7 @@ import { Outlet, useLoaderData, useSubmit } from 'react-router-dom';
 import { getTokenDuration } from '../utils/auth';
 
 import FeedbackModal from "../components/feedback/FeedbackModal";
-
+import { RewardPointsProvider } from '../components/rewards/RewardsProvider';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 
@@ -43,10 +43,13 @@ const UserRootLayout = ({ userId, apiUrl }) => {
 
   return (
     <>
-      <Header onMenuClick={handleMenuClick} />
-      <Sidebar />
-           <Outlet />
-           <FeedbackModal userId={userId} apiUrl={apiUrl} />
+    <RewardPointsProvider userId={userId} apiUrl={apiUrl}>      
+          <Header onMenuClick={handleMenuClick} />
+          <Sidebar />
+              <Outlet />
+              <FeedbackModal userId={userId} apiUrl={apiUrl} />
+    </RewardPointsProvider>
+    
     </>
   );
 };
