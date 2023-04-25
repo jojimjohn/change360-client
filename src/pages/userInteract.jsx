@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Button,
@@ -15,8 +15,6 @@ import {
   } from "@mui/material";
 import axios from 'axios';
 
-import logo from '../images/logo.png';
-
 const UserInteract = ({address, apiUrl }) => {
   const [questionNum, setQuestionNum] = useState(1);
   const [responses, setResponses] = useState([]);
@@ -25,8 +23,6 @@ const UserInteract = ({address, apiUrl }) => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
-
-  
 const UserChatBubble = styled(Card)({
   padding: '10px',
   borderRadius: '15px',
@@ -50,8 +46,7 @@ const UserAvatar = styled(Avatar)({
 });
 
 const AIAvatar = styled(Avatar)(({ theme }) => ({
-  backgroundImage: `url(${process.env.REACT_APP_BASE_API_URL}/images/logo.png)`,
-  backgroundColor: theme.palette.primary.main,
+  // backgroundColor: theme.palette.primary.main,
 }));
 
   
@@ -220,7 +215,7 @@ const AIAvatar = styled(Avatar)(({ theme }) => ({
     {responses.map((response, index) => (
       <>
         <Box key={`q${index}`} sx={{ mb: 2, display: 'flex', justifyContent: 'flex-start' }}>
-          <AIAvatar />
+        <AIAvatar src={`/images/logo.png`} />
           <AIChatBubble sx={{ ml: 1 }}>
             <ChatQuestion>{response.question}</ChatQuestion>
           </AIChatBubble>
@@ -235,7 +230,7 @@ const AIAvatar = styled(Avatar)(({ theme }) => ({
     ))}
     {responses.length <= 3 && (
       <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-start' }}>
-        <AIAvatar />
+        <AIAvatar src={`/images/logo.png`} />
         <AIChatBubble sx={{ ml: 1 }}>
           <ChatQuestion>{questionText}</ChatQuestion>
         </AIChatBubble>
@@ -254,7 +249,7 @@ const AIAvatar = styled(Avatar)(({ theme }) => ({
 
     {isLoading || response != null || error != null ? (
       <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-start' }}>
-        <AIAvatar />
+       <AIAvatar src={`/images/logo.png`} />
         <AIChatBubble sx={{ ml: 1 }}>
           {isLoading ? (
             <>
