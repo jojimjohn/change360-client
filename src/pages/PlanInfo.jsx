@@ -89,7 +89,7 @@ const PlanInfo = ({ handleResponse, apiUrl }) => {
             </Typography>
             <Box sx={{ mb: 3}}>
               <Typography variant="body1" gutterBottom>
-                You don't have a meal and nutrition plan yet. Purchase one now to get started on your health journey.
+               Purchase a new meal plan now to get started on your health journey.
               </Typography>
             </Box>
             <Button variant="contained" color="primary" onClick={handlePurchasePlan}>
