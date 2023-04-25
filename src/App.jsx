@@ -54,8 +54,8 @@ const darkTheme = createTheme({
   },
 });
 
-const apiUrl = 'http://localhost:5000/api';
-//const apiUrl = 'https://change360-v1.onrender.com/api';
+//const apiUrl = 'http://localhost:5000/api';
+const apiUrl = 'https://change360-v1.onrender.com/api';
 
 const router = createBrowserRouter([
   {
@@ -83,7 +83,7 @@ const router = createBrowserRouter([
           },  
           {
             path: 'plans',
-            element: <PlanInfo />,
+            element: <PlanInfo userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} />,
           
           },
           {

@@ -15,6 +15,8 @@ import {
   } from "@mui/material";
 import axios from 'axios';
 
+import logo from '../images/logo.png';
+
 const UserInteract = ({address, apiUrl }) => {
   const [questionNum, setQuestionNum] = useState(1);
   const [responses, setResponses] = useState([]);
@@ -23,9 +25,42 @@ const UserInteract = ({address, apiUrl }) => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
+
+  
+const UserChatBubble = styled(Card)({
+  padding: '10px',
+  borderRadius: '15px',
+  maxWidth: '70%',
+  backgroundColor: '#1a1a1a',
+  color: '#ffffff',
+  marginBottom: '8px',
+});
+
+const AIChatBubble = styled(Card)({
+  padding: '10px',
+  borderRadius: '15px',
+  maxWidth: '70%',
+  backgroundColor: '#333333',
+  color: '#ffffff',
+  marginBottom: '8px',
+});
+
+const UserAvatar = styled(Avatar)({
+  backgroundColor: '#2196f3',
+});
+
+const AIAvatar = styled(Avatar)(({ theme }) => ({
+  backgroundImage: `url(${process.env.REACT_APP_BASE_API_URL}/images/logo.png)`,
+  backgroundColor: theme.palette.primary.main,
+}));
+
+  
   const ChatBox = styled(Box)({
     flexGrow: 1,
     p: 3,
+    minHeight: '50vh',
+    backgroundColor: '#1a1a1a',
+    padding: '10px',
   });
   
   const ChatHeader = styled(Typography)({
@@ -182,105 +217,63 @@ const UserInteract = ({address, apiUrl }) => {
 
   return (
     <ChatBox>
-        <ChatHeader gutterBottom>
-            Change 360:
-        </ChatHeader>
-        {responses.slice(0, 3).map((response, index) => (
-        <Box key={index} sx={{ mb: 2 }}>
+    {responses.map((response, index) => (
+      <>
+        <Box key={`q${index}`} sx={{ mb: 2, display: 'flex', justifyContent: 'flex-start' }}>
+          <AIAvatar />
+          <AIChatBubble sx={{ ml: 1 }}>
             <ChatQuestion>{response.question}</ChatQuestion>
+          </AIChatBubble>
+        </Box>
+        <Box key={`r${index}`} sx={{ mb: 2, display: 'flex', justifyContent: 'flex-end' }}>
+          <UserAvatar />
+          <UserChatBubble sx={{ ml: 1 }}>
             <ChatResponse>{response.response}</ChatResponse>
+          </UserChatBubble>
         </Box>
-            ))}
-            {responses.length > 3 && (
-            <Box key={responses.length - 1} sx={{ mb: 2 }}>
-                <ChatQuestion>{responses[3].question}</ChatQuestion>
-                <ChatResponse>{responses[3].response}</ChatResponse>
-            </Box>
-            )}
-        {responses.length <= 3 && (
-            <Box sx={{ mb: 2 }}>
-            <ChatQuestion>{questionText}</ChatQuestion>
-        </Box>
-            )}
-        {showTextBox && (
-            <Box sx={{ mb: 2 }}>
-            <ChatInput id="response" label="Response" fullWidth variant="outlined" onKeyPress={handleKeyPress} />
-            </Box>
-        )}
-        {showTextBox && (
-        <ChatButton variant="contained" color="primary" onClick={handleNext}>
-            {questionNum === 4 ? 'Submit' : 'Next'}
-        </ChatButton>
-        )}
+      </>
+    ))}
+    {responses.length <= 3 && (
+      <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-start' }}>
+        <AIAvatar />
+        <AIChatBubble sx={{ ml: 1 }}>
+          <ChatQuestion>{questionText}</ChatQuestion>
+        </AIChatBubble>
+      </Box>
+    )}
+    {showTextBox && (
+      <Box sx={{ mb: 2 }}>
+        <ChatInput id="response" label="Response" fullWidth variant="outlined" onKeyPress={handleKeyPress} />
+      </Box>
+    )}
+    {showTextBox && (
+      <ChatButton variant="contained" color="primary" onClick={handleNext}>
+        {questionNum === 4 ? 'Submit' : 'Next'}
+      </ChatButton>
+    )}
 
-  {isLoading || response != null || error != null? (
-
-    <Card sx={{ maxWidth: '80%', m: 2 }}>
-       <CardHeader
-       sx={{
-         display: 'flex',
-         alignItems: 'center',
-         justifyContent: 'space-between',
-         p: 2,
-         bgcolor: '#f5f5f5',
-         borderBottom: '1px solid #ccc',
-       }}
-       avatar={
-         isLoading ? (
-           <Skeleton
-             animation="wave"
-             variant="circular"
-             width={40}
-             height={40}
-           />
-         ) : (
-           <Avatar
-             alt="Change 360"
-             src="../../assets/logo_small.jpg"
-             sx={{ mr: 2 }}
-           >
-             C
-           </Avatar>
-         )
-       }
-       title={
-         isLoading ? (
-           <Skeleton
-             animation="wave"
-             height={10}
-             width="80%"
-             style={{ marginBottom: 6 }}
-           />
-         ) : (
-           <Typography variant="h6">Change 360</Typography>
-         )
-       }
-     />
-       <CardContent>
-         {isLoading ? (
-           <React.Fragment>
-             <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-             <Skeleton animation="wave" height={10} width="80%" />
-           </React.Fragment>
-         ) : (
-         <>
-           {error && <Typography color="error">{error}</Typography>}
-           {response && (
-         <Box sx={{ mt: 2 }}>
-           <Typography variant="body2" color="text.secondary" component="p">
-           {formatMessage(response.message)}
-           </Typography>
-       
-    
-         </Box>    
-         )}
-       </>
-         )}
-       </CardContent>
-    </Card>
-    ) :('') }
-
-    </ChatBox>
+    {isLoading || response != null || error != null ? (
+      <Box sx={{ mb: 2, display: 'flex', justifyContent: 'flex-start' }}>
+        <AIAvatar />
+        <AIChatBubble sx={{ ml: 1 }}>
+          {isLoading ? (
+            <>
+              <CircularProgress />
+              <Typography variant="body2" color="textSecondary">
+                Please wait while the AI is generating a custom response...
+              </Typography>
+            </>
+          ) : error ? (
+            <Typography color="error">{error}</Typography>
+          ) : (
+            <ChatResponse>{formatMessage(response.message)}</ChatResponse>
+          )}
+        </AIChatBubble>
+      </Box>
+    ) : (
+      ''
+    )}
+  </ChatBox>
   
 
   );
