@@ -108,14 +108,35 @@ const Header = ({onMenuClick}) => {
                         sx={{
                             mr: 4
                         }}>
-                        BNB Balance: {bnbBalance}
+                        Your Balance: 
                     </Typography>
                     <Typography
                         variant="body1"
                         sx={{
                             mr: 4
                         }}>
-                        USDT Balance: {usdtBalance}
+                       {bnbBalance} BNB
+                    </Typography>
+                    <Typography
+                        variant="body1"
+                        sx={{
+                            mr: 4
+                        }}>
+                      |
+                    </Typography>
+                    <Typography
+                        variant="body1"
+                        sx={{
+                            mr: 4
+                        }}>
+                          {usdtBalance} USDT   
+                    </Typography>
+                    <Typography
+                        variant="body1"
+                        sx={{
+                            mr: 4
+                        }}>
+                      |
                     </Typography>
                     <Typography
                         variant="body1"

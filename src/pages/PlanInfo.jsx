@@ -43,7 +43,7 @@ const PlanInfo = ({ handleResponse, apiUrl }) => {
 
     fetchUser();
   
-  }, []);
+  }, [walletAddress]);
   
 
   const handlePurchasePlan = () => {
