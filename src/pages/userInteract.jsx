@@ -85,7 +85,7 @@ const AIAvatar = styled(Avatar)(({ theme }) => ({
     marginTop: '1rem',
   });
 
-  console.log(address);
+ // console.log(address);
 
   const handleNext = async () => {    
     const response = document.getElementById('response').value;
@@ -116,7 +116,7 @@ const AIAvatar = styled(Avatar)(({ theme }) => ({
         address
        };
              
-      console.log(jsonData);
+     // console.log(jsonData);
    
       try {
        const aiResponse = await axios.post(`${apiUrl}/ai`, jsonData);

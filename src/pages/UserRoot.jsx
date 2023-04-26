@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
 import { useEffect, useState } from 'react';
 import { Outlet, useLoaderData, useSubmit } from 'react-router-dom';
+import { Box } from "@mui/material";
 
 import { getTokenDuration } from '../utils/auth';
 
@@ -44,10 +44,25 @@ const UserRootLayout = ({ userId, apiUrl }) => {
   return (
     <>
     <RewardPointsProvider userId={userId} apiUrl={apiUrl}>      
-          <Header onMenuClick={handleMenuClick} />
+          <Header />
           <Sidebar />
-              <Outlet />
-              <FeedbackModal userId={userId} apiUrl={apiUrl} />
+          <Box
+            sx={{
+              marginLeft: {
+                xs: "56px",
+                sm: "56px",
+                md: "240px",
+              },
+              width: {
+                xs: "calc(100% - 56px)",
+                sm: "calc(100% - 56px)",
+                md: "calc(100% - 240px)",
+              },
+            }}
+          >
+            <Outlet />
+          </Box>
+          <FeedbackModal userId={userId} apiUrl={apiUrl} />
     </RewardPointsProvider>
     
     </>

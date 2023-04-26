@@ -19,7 +19,7 @@ import {
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 
-const Header = ({onMenuClick}) => {
+const Header = () => {
     const token = useRouteLoaderData('root');
 
     const {
@@ -85,7 +85,8 @@ const Header = ({onMenuClick}) => {
                             style={{
                                 marginTop: '8px',
                                 marginBottom: '8px'
-                            }}/>
+                            }}
+                            />
                     </NavLink>
                     <Typography
                         variant="h6"
@@ -93,7 +94,12 @@ const Header = ({onMenuClick}) => {
                             fontWeight: 'bold',
                             fontSize: '24px',
                             letterSpacing: '1px',
-                            ml: 1
+                            ml: 1,
+                            display: {
+                                xs: 'none', // Hide on extra small screens
+                                sm: 'none', // Hide on small screens
+                                md: 'block', // Show on medium screens and up
+                              },
                         }}>
                         C.H.A.N.G.E 360
                     </Typography>
@@ -106,42 +112,72 @@ const Header = ({onMenuClick}) => {
                     <Typography
                         variant="body1"
                         sx={{
-                            mr: 4
+                            mr: 4,
+                            display: {
+                                xs: 'none', // Hide on extra small screens
+                                sm: 'none', // Hide on small screens
+                                md: 'block', // Show on medium screens and up
+                              },
                         }}>
                         Your Balance: 
                     </Typography>
                     <Typography
                         variant="body1"
                         sx={{
-                            mr: 4
+                            mr: 4,
+                            display: {
+                                xs: 'none', // Hide on extra small screens
+                                sm: 'none', // Hide on small screens
+                                md: 'block', // Show on medium screens and up
+                              },
                         }}>
                        {bnbBalance} BNB
                     </Typography>
                     <Typography
                         variant="body1"
                         sx={{
-                            mr: 4
+                            mr: 4,
+                            display: {
+                                xs: 'none', // Hide on extra small screens
+                                sm: 'none', // Hide on small screens
+                                md: 'block', // Show on medium screens and up
+                              },
                         }}>
                       |
                     </Typography>
                     <Typography
                         variant="body1"
                         sx={{
-                            mr: 4
+                            mr: 4,
+                            display: {
+                                xs: 'none', // Hide on extra small screens
+                                sm: 'none', // Hide on small screens
+                                md: 'block', // Show on medium screens and up
+                              },
                         }}>
                           {usdtBalance} USDT   
                     </Typography>
                     <Typography
                         variant="body1"
                         sx={{
-                            mr: 4
+                            mr: 4,
+                            display: {
+                                xs: 'none', // Hide on extra small screens
+                                sm: 'none', // Hide on small screens
+                                md: 'block', // Show on medium screens and up
+                              },
                         }}>
                       |
                     </Typography>
                     <Typography
                         variant="body1"
                         sx={{
-                            mr: 4
+                            mr: 4,
+                            display: {
+                                xs: 'none', // Hide on extra small screens
+                                sm: 'none', // Hide on small screens
+                                md: 'block', // Show on medium screens and up
+                              },
                         }}>
                         BNB Price: {bnbPrice}
                     </Typography>

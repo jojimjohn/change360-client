@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
 import {
     Box,
     List,
@@ -10,7 +10,6 @@ import {
     Tooltip
 } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import RedeemIcon from '@mui/icons-material/Redeem';
 import LiveHelpIcon from '@mui/icons-material/LiveHelp';
@@ -18,129 +17,80 @@ import TwitterIcon from '../images/twitter-icon.png';
 import TelegramIcon from '../images/telegram-icon.png';
 import WhitepaperIcon from '../images/whitepaper-icon.png';
 
-import {Link} from 'react-router-dom';
+import {Link, useLocation, NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
     const [isMouseOver, setIsMouseOver] = useState(false);
     const [showLabels, setShowLabels] = useState(false);
+    const location = useLocation();
+    const labelTimeout = useRef(null);
 
     const handleMouseEnter = () => {
-        setIsMouseOver(true);
-        setTimeout(() => setShowLabels(true), 250);
+    if (labelTimeout.current) {
+        clearTimeout(labelTimeout.current);
+    }
+    setIsMouseOver(true);
+    setShowLabels(true);
     };
 
     const handleMouseLeave = () => {
-        setTimeout(() => setShowLabels(false), 200);
-        setTimeout(() => setIsMouseOver(false), 150);
+    labelTimeout.current = setTimeout(() => {
+        setShowLabels(false);
+        setIsMouseOver(false);
+    }, 150);
     };
 
-    const handleClick = () => {
-        setIsMouseOver(!isMouseOver);
-        setShowLabels(!showLabels);
-    };
-
-    const renderMenuItems = () => (
-        <> < Link to = "/user" style = {{ textDecoration: 'none', color: 'inherit' }} > <ListItem>
-            <ListItemIcon>
-                <DashboardIcon/>
-            </ListItemIcon>
-            <ListItemText
-                primary="Dashboard"
+    const SidebarMenuItem = ({ to, icon, text }) => {
+        const isActive = location.pathname === to;
+      
+        return (
+          <NavLink to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <ListItem>
+              <ListItemIcon
                 sx={{
-                    display: showLabels
-                        ? 'block'
-                        : 'none',
-                    position: 'absolute',
-                    left: '56px'
-                }}/>
-        </ListItem>
-    </Link>
-    <Link
-        to="/user/plans"
-        style={{
-            textDecoration: 'none',
-            color: 'inherit'
-        }}>
-        <ListItem>
-            <ListItemIcon>
-                <MenuBookIcon/>
-            </ListItemIcon>
-            <ListItemText
-                primary="My Meal Plans"
+                  color: isActive ? 'primary.main' : 'inherit',
+                }}
+              >
+                {icon}
+              </ListItemIcon>
+              <ListItemText
+                primary={text}
                 sx={{
-                    display: showLabels
-                        ? 'block'
-                        : 'none',
-                    position: 'absolute',
-                    left: '56px'
-                }}/>
-        </ListItem>
-    </Link>
-    {/* <Link
-        to="/user/settings"
-        style={{
-            textDecoration: 'none',
-            color: 'inherit'
-        }}>
-        <ListItem>
-            <ListItemIcon>
-                <AccountBoxIcon/>
-            </ListItemIcon>
-            <ListItemText
-                primary="Profile"
-                sx={{
-                    display: showLabels
-                        ? 'block'
-                        : 'none',
-                    position: 'absolute',
-                    left: '56px'
-                }}/>
-        </ListItem>
-    </Link> */}
-    <Link
-        to="/user/rewards"
-        style={{
-            textDecoration: 'none',
-            color: 'inherit'
-        }}>
-        <ListItem>
-            <ListItemIcon>
-                <RedeemIcon/>
-            </ListItemIcon>
-            <ListItemText
-                primary="Rewards"
-                sx={{
-                    display: showLabels
-                        ? 'block'
-                        : 'none',
-                    position: 'absolute',
-                    left: '56px'
-                }}/>
-        </ListItem>
-    </Link>
-    <Link
-        to="/faq"
-        style={{
-            textDecoration: 'none',
-            color: 'inherit'
-        }}>
-        <ListItem>
-            <ListItemIcon>
-                <LiveHelpIcon/>
-            </ListItemIcon>
-            <ListItemText
-                primary="FAQ"
-                sx={{
-                    display: showLabels
-                        ? 'block'
-                        : 'none',
-                    position: 'absolute',
-                    left: '56px'
-                }}/>
-        </ListItem>
-    </Link>
-</>
-    );
+                  display: showLabels ? 'block' : 'none',
+                  position: 'absolute',
+                  left: '56px',
+                  color: isActive ? 'primary.main' : 'inherit',
+                }}
+              />
+            </ListItem>
+          </NavLink>
+        );
+      };     
+      
+      const renderMenuItems = () => (
+        <>
+          <SidebarMenuItem
+            to="/user"
+            icon={<DashboardIcon />}
+            text="Dashboard"
+          />
+          <SidebarMenuItem
+            to="/user/plans"
+            icon={<MenuBookIcon />}
+            text="My Meal Plans"
+          />
+          <SidebarMenuItem
+            to="/user/rewards"
+            icon={<RedeemIcon />}
+            text="Rewards"
+          />
+          <SidebarMenuItem
+            to="/user/faq"
+            icon={<LiveHelpIcon />}
+            text="FAQ"
+          />
+        </>
+      );
 
     const renderFooter = () => (
         <Box
@@ -189,7 +139,7 @@ const Sidebar = () => {
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            onClick={handleClick}>
+            >
             <List>{renderMenuItems()}</List>
             <Divider/> {renderFooter()}
         </Box>

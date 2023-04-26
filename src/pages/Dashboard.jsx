@@ -22,14 +22,14 @@ const Dashboard = ({ isLoggedIn, apiUrl }) => {
     
   
       {/* NFTS */}
-      <Grid item xs={12} md={8} lg={9}>
+      <Grid item xs={12} sm={8} md={9}>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 240 }}>
          
           <Typography variant="h6">Your NFT's</Typography>
         </Paper>
       </Grid>
        {/* Rewards earned */}
-       <Grid item xs={12} md={4} lg={3}>
+       <Grid item xs={12} sm={4} md={3}>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 240 }}>
           <Typography variant="h6" textAlign="center">
             Rewards

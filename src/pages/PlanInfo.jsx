@@ -7,7 +7,7 @@ import UserInteract from './userInteract';
 import {useWallet} from "../components/walletconnect/WalletContext";
 
 
-const PlanInfo = ({ handleResponse, apiUrl }) => {
+const PlanInfo = ({ userId, apiUrl }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [mealPlan, setMealPlan] = useState(null); // TODO: check if the user has a plan
@@ -66,7 +66,7 @@ const PlanInfo = ({ handleResponse, apiUrl }) => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Box sx={{ mb: 3 }} style={{ marginTop: '30px' }}>
-                  <UserInteract address={walletAddress} apiUrl={apiUrl} />
+                  <UserInteract address={userId} apiUrl={apiUrl} />
                 </Box>
               </Grid>
             </Grid>
