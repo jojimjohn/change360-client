@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import ReactFbq from 'react-fbq';
 
 import Header from '../partials/Header';
 import PageIllustration from '../partials/PageIllustration';
@@ -11,9 +12,12 @@ import Testimonials from '../partials/Testimonials';
 import Newsletter from '../partials/Newsletter';
 import Footer from '../partials/Footer';
 
-//import PageContent from '../components/PageContent';
-
 function Home() {
+  useEffect(() => {
+    ReactFbq.pageView();
+    ReactFbq.initialize({ id: '1248511849106047' });
+  }, []);
+
   return (
     <>
     {/* <PageContent title="C.H.A.N.G.E. 360">
