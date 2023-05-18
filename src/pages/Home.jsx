@@ -33,7 +33,7 @@ function Home() {
           <HeroHome />
           <FeaturesBlocks />
           <FeaturesZigZag />
-          <Plans />
+          {/* <Plans /> */}
           <Timeline />
           {/* <Testimonials /> */}
           <Newsletter />
