@@ -14,8 +14,8 @@ import Footer from '../partials/Footer';
 
 function Home() {
   useEffect(() => {
-    ReactFbq.pageView();
     ReactFbq.initialize({ id: '1248511849106047' });
+    ReactFbq.pageView();
   }, []);
 
   return (
