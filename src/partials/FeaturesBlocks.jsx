@@ -1,11 +1,17 @@
 import React from 'react';
-import timeline_launch from '../images/timeline-launch.png';
-import timeline_wellness from '../images/timeline-wellness.png';
-import timeline_habit from '../images/timeline-habit.png';
-import timeline_blockchain from '../images/timeline-blockchain.png';
-import timeline_nutrition from '../images/timeline-nutrition.png';
-import timeline_motivation from '../images/timeline-motivation.png';
-import timeline_gym from '../images/timeline-gym.png';
+import features_break_free from '../images/features-break-free.jpg';
+import features_overcome_challenges from '../images/features-overcome-challenges.jpg';
+import features_health from '../images/features-health.jpg';
+import features_personal_transformation from '../images/features-personal-transformation.jpg';
+import features_change from '../images/features-change.png';
+import features_fingertips from '../images/features-fingertips.jpg';
+import features_getting_started from '../images/features-getting-started.jpg';
+import features_gains from '../images/features-gains.jpg';
+import features_success_priority from '../images/features-success-priority.jpg';
+import features_take_action_today from '../images/features-take-action-today.jpg';
+import features_satisfied_customer from '../images/features-satisfied-customer.jpg';
+import features_start_journey from '../images/features-start-journey.jpg';
+import features_transform_now from '../images/features-transform-now.jpg';
 
 function FeaturesBlocks() {
   return (
@@ -19,12 +25,7 @@ function FeaturesBlocks() {
             
             {/* 1st item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g transform="translate(32, 32)">
-                  <image xlinkHref={timeline_launch} width="42" height="42"  x="-21" y="-21" />
-                </g>
-              </svg>
+              <img src={features_break_free} alt="Break Free" className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">Break Free From Your Health & Fitness Plateau</h4>
               <p className="text-lg text-gray-400" align="justify">
                 Tired of feeling defeated by your health and fitness journey? Have you tried countless diets and exercise programs without seeing the desired results? You're not alone. Discover how CHANGE 360 is revolutionizing the health and wellness industry and helping people just like you achieve their goals.
@@ -38,12 +39,7 @@ function FeaturesBlocks() {
             
             {/* 2nd item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g transform="translate(32, 32)">
-                  <image xlinkHref={timeline_wellness} width="42" height="42"  x="-21" y="-21" />
-                </g>
-              </svg>
+              <img src={features_overcome_challenges} alt="Overcome Challenges" className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Your Struggles with Health & Wellness, Understood
               </h4>
@@ -59,13 +55,7 @@ function FeaturesBlocks() {
             
             {/* 3rd item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g transform="translate(22 21)" strokeLinecap="square" strokeWidth="2" fill="none" fillRule="evenodd">
-                  <path className="stroke-current text-primary-100" d="M17 22v-6.3a8.97 8.97 0 003-6.569A9.1 9.1 0 0011.262 0 9 9 0 002 9v1l-2 5 2 1v4a2 2 0 002 2h4a5 5 0 005-5v-5" />
-                  <circle className="stroke-current text-primary-300" cx="13" cy="9" r="3" />
-                </g>
-              </svg>
+              <img src={features_personal_transformation} alt="Personal Transformation" className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Connect with Your Personal Transformation
               </h4>
@@ -81,12 +71,7 @@ function FeaturesBlocks() {
             
             {/* 4th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g transform="translate(32, 32)">
-                  <image xlinkHref={timeline_habit} width="42" height="42"  x="-21" y="-21" />
-                </g>
-              </svg>
+              <img src={features_change} alt="CHANGE 360" className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Introducing CHANGE 360: The Ultimate Health & Fitness Solution
               </h4>
@@ -102,12 +87,7 @@ function FeaturesBlocks() {
             
             {/* 5th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g transform="translate(32, 32)">
-                  <image xlinkHref={timeline_blockchain} width="42" height="42"  x="-21" y="-21" />
-                </g>
-              </svg>
+              <img src={features_fingertips} className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Cutting-Edge Technology & Expertise at Your Fingertips
               </h4>
@@ -123,12 +103,7 @@ function FeaturesBlocks() {
             
             {/* 6th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g transform="translate(32, 32)">
-                  <image xlinkHref={timeline_nutrition} width="42" height="42"  x="-21" y="-21" />
-                </g>
-              </svg>
+              <img src={features_health} className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Transform Your Health & Wellness Journey
               </h4>
@@ -144,13 +119,7 @@ function FeaturesBlocks() {
             
             {/* 7th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g strokeLinecap="square" strokeWidth="2" fill="none" fillRule="evenodd">
-                  <path className="stroke-current text-primary-100" d="M29 42h10.229a2 2 0 001.912-1.412l2.769-9A2 2 0 0042 29h-7v-4c0-2.373-1.251-3.494-2.764-3.86a1.006 1.006 0 00-1.236.979V26l-5 6" />
-                  <path className="stroke-current text-primary-300" d="M22 30h4v12h-4z" />
-                </g>
-              </svg>
+              <img src={features_getting_started} className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">Simple & Effective: How CHANGE 360 Works</h4>
               <p className="text-lg text-gray-400" align="justify">
                 Getting started with CHANGE 360 is easy. First, complete a comprehensive assessment to determine your unique needs and goals. Then, receive personalized meal plans, exercise programs, and insights to help you achieve your objectives. Our AI technology adapts to your progress, ensuring you're always making strides towards your fitness goals.
@@ -164,12 +133,7 @@ function FeaturesBlocks() {
             
             {/* 8th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g transform="translate(32, 32)">
-                  <image xlinkHref={timeline_motivation} width="42" height="42"  x="-21" y="-21" />
-                </g>
-              </svg>
+              <img src={features_gains} className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Experience the Gains of CHANGE 360
               </h4>
@@ -185,11 +149,7 @@ function FeaturesBlocks() {
             
             {/* 9th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <path className="stroke-current text-primary-100" strokeWidth="2" strokeLinecap="square" d="M21 23h22v18H21z" fill="none" fillRule="evenodd" />
-                <path className="stroke-current text-primary-300" d="M26 28h12M26 32h12M26 36h5" strokeWidth="2" strokeLinecap="square" />
-                </svg>
+              <img src={features_success_priority} className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Our Guarantee: Your Success is Our Priority
               </h4>
@@ -205,11 +165,7 @@ function FeaturesBlocks() {
             
             {/* 10th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <path className="stroke-current text-primary-100" d="M30 39.313l-4.18 2.197L27 34.628l-5-4.874 6.91-1.004L32 22.49l3.09 6.26L42 29.754l-3 2.924" strokeLinecap="square" strokeWidth="2" fill="none" fillRule="evenodd" />
-                <path className="stroke-current text-primary-300" d="M43 42h-9M43 37h-9" strokeLinecap="square" strokeWidth="2" />
-              </svg>
+              <img src={features_take_action_today} className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Make the Logical Choice: Take Action Today
               </h4>
@@ -225,14 +181,7 @@ function FeaturesBlocks() {
             
             {/* 11th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g transform="translate(21 22)" strokeLinecap="square" strokeWidth="2" fill="none" fillRule="evenodd">
-                  <path className="stroke-current text-primary-300" d="M17 2V0M19.121 2.879l1.415-1.415M20 5h2M19.121 7.121l1.415 1.415M17 8v2M14.879 7.121l-1.415 1.415M14 5h-2M14.879 2.879l-1.415-1.415" />
-                  <circle className="stroke-current text-primary-300" cx="17" cy="5" r="3" />
-                  <path className="stroke-current text-primary-100" d="M8.86 1.18C3.8 1.988 0 5.6 0 10c0 5 4.9 9 11 9a10.55 10.55 0 003.1-.4L20 21l-.6-5.2a9.125 9.125 0 001.991-2.948" />
-                </g>
-              </svg>
+              <img src={features_satisfied_customer} className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Real Success Stories: Hear from Our Satisfied Customers
               </h4>
@@ -260,14 +209,7 @@ function FeaturesBlocks() {
             
             {/* 12th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g transform="translate(21 21)" strokeLinecap="square" strokeWidth="2" fill="none" fillRule="evenodd">
-                  <ellipse className="stroke-current text-primary-300" cx="11" cy="11" rx="5.5" ry="11" />
-                  <path className="stroke-current text-primary-100" d="M11 0v22M0 11h22" />
-                  <circle className="stroke-current text-primary-100" cx="11" cy="11" r="11" />
-                </g>
-              </svg>
+              <img src={features_start_journey} className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Don't Wait: Start Your Journey Today
               </h4>
@@ -283,12 +225,7 @@ function FeaturesBlocks() {
             
             {/* 13th item */}
             <div className="relative flex flex-col items-center" data-aos="fade-up" data-aos-delay="400" data-aos-anchor="[data-aos-id-blocks]">
-              <svg className="w-16 h-16 mb-4" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <rect className="fill-current text-primary-400" width="64" height="64" rx="32" />
-                <g transform="translate(32, 32)">
-                  <image xlinkHref={timeline_gym} width="42" height="42"  x="-21" y="-21" />
-                </g>
-              </svg>
+              <img src={features_transform_now} className="circle-image" width="480" height="480" /><br/>
               <h4 className="h4 mb-2">
                 Begin Your Transformation Now
               </h4>

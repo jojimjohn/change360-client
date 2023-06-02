@@ -22,3 +22,7 @@
 [x-cloak=""] {
     display: none;
 }
+
+.circle-image {
+  border-radius: 50%;
+}
