@@ -54,8 +54,8 @@ const darkTheme = createTheme({
   },
 });
 
-const apiUrl = 'http://localhost:5000/api';
-//const apiUrl = 'https://change360-v1.onrender.com/api';
+//const apiUrl = 'http://localhost:5000/api';
+const apiUrl = 'https://change360-v1.onrender.com/api';
 
 const router = createBrowserRouter([
   {
@@ -63,23 +63,23 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     id: 'root',
-    loader: tokenLoader,
     children: [
       { index: true, element: <Homepage /> },  
       {
         path: 'user',
         id: 'user',
+        loader: tokenLoader,
         element: (
-          // <AuthProvider>
-          //   <UserRootLayout />
-          // </AuthProvider>
-          <UserRootLayout userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} />
+          <AuthProvider>
+            <UserRootLayout apiUrl={apiUrl} />
+          </AuthProvider>
+       //   <UserRootLayout userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} />
         ), 
         children: [
           {
             index: true,
             element: <Dashboard apiUrl={apiUrl}/>,
-         //   loader: checkAuthLoader,
+          //  loader: checkAuthLoader,
           },  
           {
             path: 'plans',
