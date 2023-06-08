@@ -24,7 +24,6 @@ import BuyPlanPage from './pages/Payment';
 
 //User meal plan
 //import UserRootLayout from './pages/UserRoot'
-//import MealPlansPage from './pages/NewMealPlan'
 import NewPlanPage from './pages/NewMealPlan'
 
 import RewardsPage from './pages/Rewards'
