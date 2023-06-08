@@ -6,12 +6,22 @@ import UserInteract from './userInteract';
 
 import {useWallet} from "../components/walletconnect/WalletContext";
 
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe('pk_test_51MvbghFgr9NTiTbN20i21MJ0n4PihpgaQi5nsPZz9Z8wqW0CLhlTabaldS8VXIooqPN4yildr1hO1MN7ndM7IrMl00MwzIiNVh');
+import CheckoutForm from "./CheckoutForm";
+import walletimg from '../images/wallet-icon.png';
+import cardimg from '../images/payment-card.png';
 
 const PlanInfo = ({ userId, apiUrl }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [mealPlan, setMealPlan] = useState(null); // TODO: check if the user has a plan
   const [user, setUser] = useState(null);
+  const [paymentOption, setPaymentOption] = useState(''); // 'crypto', 'card', or ''
+
+  const [clientSecret, setClientSecret] = useState("");
 
     const {
         walletAddress
@@ -45,10 +55,68 @@ const PlanInfo = ({ userId, apiUrl }) => {
   
   }, [walletAddress]);
   
+  useEffect(() => {
+    // Get existing PaymentIntent id from local storage
+    // ToDo: change the storage to secure database for the wallet user instea of in the local browser storage for security
+    const existingPaymentIntentId = localStorage.getItem('paymentIntentId');
 
-  const handlePurchasePlan = () => {
-    navigate('/user/01/buy');
-  }
+    if (existingPaymentIntentId && existingPaymentIntentId !='undefined') {
+        // Retrieve existing PaymentIntent
+        fetch(`${apiUrl}/payments/retrieve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: existingPaymentIntentId }),
+        })
+        .then((res) => res.json())
+            .then(paymentIntent => {
+                if (paymentIntent.status === 'requires_payment_method') {
+                    // PaymentIntent is still valid, use it
+                    setClientSecret(paymentIntent.client_secret);
+                } else {
+                    // PaymentIntent is no longer valid, create a new one
+                    createPaymentIntent();
+                }
+            });
+    } else {
+        // No existing PaymentIntent, create a new one
+        createPaymentIntent();
+    }
+}, []);
+
+function createPaymentIntent() {
+    fetch(`${apiUrl}/payments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: [{ id: "mealplan" }] }),
+    })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log( data.id);
+            // Store PaymentIntent id in local storage
+            localStorage.setItem('paymentIntentId', data.id);
+            setClientSecret(data.clientSecret)
+        });
+}
+
+  const appearance = {
+    theme: 'night',
+    labels: 'floating'
+  };
+  const options = {
+    clientSecret,
+    appearance,
+  };
+
+  const handlePurchasePlan = async (event) => {
+    event.preventDefault();
+
+    const jsonData = {
+      // address
+    };
+    //  navigate('/user/01/buy');
+
+  
+  };
 
   return (
 
@@ -73,37 +141,65 @@ const PlanInfo = ({ userId, apiUrl }) => {
             {/* TODO: display the user's meal and nutrition plans */}
           </>
         ) : (
+          <Grid item xs={12} sx={{minHeight: '30vh'}}>
           <>
             <Typography variant="h6" gutterBottom>
               Purchase a Meal and Nutrition Plan
             </Typography>
             <Box sx={{ mb: 3 }}>
               <Typography variant="body1" gutterBottom>
-                You don't have a meal and nutrition plan yet. Purchase one now to get started on your health journey.
+                Purchase a new meal plan now to get started on your health journey.
               </Typography>
             </Box>
-            <Button variant="contained" color="primary" onClick={handlePurchasePlan}>
-              Purchase Plan
-            </Button>
+
+            <Grid container spacing={1} justify="center">
+            <Grid item xs={3}>
+              <Box bgcolor="#ccc" display="flex" flexDirection="column" justifyContent="space-between" alignItems="center" p={2} borderRadius={2} style={{ cursor: 'pointer', width: '150px', height: '200px' }} onClick={() => setPaymentOption('crypto')}>
+                <img 
+                  src={walletimg}
+                  width="150"
+                  alt="Pay with Crypto" 
+                />
+                <Typography variant="body1" style={{ marginTop: '10px', color:'black' }}>
+                  Pay with Crypto
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={3}>
+              <Box bgcolor="#ccc" display="flex" flexDirection="column" justifyContent="space-between" alignItems="center" p={2} borderRadius={2} style={{ cursor: 'pointer', width: '150px', height: '200px' }} onClick={() => setPaymentOption('card')}>
+                <img 
+                  src={cardimg}
+                  width="180"
+                  alt="Pay with Card" 
+                />
+                <Typography variant="body1" style={{ marginTop: '10px', color:'black' }}>
+                  Pay with Card
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+
+
+            {paymentOption === 'crypto' && (
+              <Box sx={{ mt: 3 }}>
+                <Button variant="contained" color="primary" onClick={handlePurchasePlan}>
+                  Buy Now
+                </Button>
+              </Box>
+            )}
+            {paymentOption === 'card' && clientSecret && (
+              <Box sx={{ mt: 3 }}>
+                <Elements options={options} stripe={stripePromise}>
+                  <CheckoutForm />
+                </Elements>
+              </Box>
+            )}
           </>
+        </Grid>
         )}
       </Grid>
 
-      <Grid item xs={12} sx={{minHeight: '30vh'}}>
-      <>
-            <Typography variant="h6" gutterBottom>
-              Purchase a Meal and Nutrition Plan
-            </Typography>
-            <Box sx={{ mb: 3}}>
-              <Typography variant="body1" gutterBottom>
-               Purchase a new meal plan now to get started on your health journey.
-              </Typography>
-            </Box>
-            <Button variant="contained" color="primary" onClick={handlePurchasePlan}>
-              Purchase Plan
-            </Button>
-          </>
-      </Grid>
+    
 
       </Grid>
   </Container>

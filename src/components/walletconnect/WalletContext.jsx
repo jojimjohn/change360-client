@@ -7,6 +7,7 @@ import { USDT_TOKEN_ADDRESS, CONTRACT_ADDRESS, BSC_CHAIN_ID } from "./constants"
 import { usdtInterface } from "./utils";
 import { toast } from "react-toastify";
 import { CompressOutlined } from "@mui/icons-material";
+import { saveAuthToken } from '../../utils/auth';
 
 const WalletContext = createContext();
 
@@ -16,6 +17,7 @@ const injectedConnector = new InjectedConnector({
 
 export const WalletProvider = ({ children }) => {
   const [walletAddress, setWalletAddress] = useState(localStorage.getItem("walletAddress"));
+  const [user, setUser] = useState(localStorage.getItem("walletAddress"));
   const { active, account, library, activate, deactivate } = useWeb3React();
   const [isTokenApproved, setIsTokenApproved] = useState(false);
 
@@ -29,13 +31,17 @@ export const WalletProvider = ({ children }) => {
       "function decimals() view returns (uint8)"
     ];
 
-  useEffect(() => {
-    if (walletAddress) {
-      checkApproval(true); // Pass true to automatically approve the token
-    //  fetchBalancesAndPrice();
-    handleConnect();
-    }
-  }, [walletAddress]); 
+    useEffect(() => {
+      if (walletAddress) {
+        (async () => {
+          const isConnected = await handleConnect();
+          if (isConnected) {
+            handleLogin(walletAddress);
+          }
+        })();
+        checkApproval(true);
+      }
+    }, [walletAddress]);
 
   
   useEffect(() => {
@@ -222,6 +228,33 @@ export const WalletProvider = ({ children }) => {
   }
 };
 
+const handleLogin = async (walletAddress) => {
+  try {
+    const response = await fetch('http://localhost:5000/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ address: walletAddress }),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to get token: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    if (data.token) {
+      saveAuthToken(data.token, data.expiresIn);
+      setUser(walletAddress); 
+    } else {
+      console.error('Failed to get token:', data);
+    }
+  } catch (error) {
+    console.error('Failed to login:', error);
+  }
+};
+
   const handleConnect = async () => {
       try {
       if (!active) {
@@ -237,8 +270,10 @@ export const WalletProvider = ({ children }) => {
         }
       }
       fetchBalancesAndPrice();
+      return true; // Return true if the connection is successful
     } catch (error) {
       console.error("Failed to connect:", error);
+      return false; // Return false if there's an error during connection
     }
   };
 

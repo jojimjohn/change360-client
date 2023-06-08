@@ -1,11 +1,26 @@
 import { createContext, useContext, useState } from 'react';
 import { redirect } from 'react-router-dom';
+import { useWallet } from "../components/walletconnect/WalletContext";
 
-// Add AuthContext and AuthProvider
-const AuthContext = createContext(null);
+const AuthContext = createContext({
+  user: null,
+  setUser: () => {},
+  token: null,
+  setToken: () => {}
+});
+
+const useWalletAddress = () => {
+  const { walletAddress } = useWallet();
+  return walletAddress;
+}
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const walletAddress = useWalletAddress();
+  const [user, setUser] = useState(walletAddress);
+  const [token, setToken] = useState(() => {
+    const storedToken = localStorage.getItem('token');
+    return storedToken;
+  });
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
@@ -22,6 +37,12 @@ export const useAuth = () => {
   }
 
   return context;
+};
+
+export const saveAuthToken = (token, expiresIn) => {
+  const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+  localStorage.setItem('token', token);
+  localStorage.setItem('expiration', expirationDate.toISOString());
 };
 
 export function getTokenDuration() {
@@ -42,14 +63,9 @@ export function getAuthToken() {
   const tokenDuration = getTokenDuration();
 
   if (tokenDuration < 0) {
-    return 'EXPIRED';
+    return null;
   }
 
-  return token;
-}
-
-export function tokenLoader() {
-  const token = getAuthToken();
   return token;
 }
 
@@ -59,4 +75,9 @@ export function checkAuthLoader() {
   if (!token) {
     return redirect('/auth');
   }
+}
+
+export function tokenLoader() {
+  const token = getAuthToken();
+  return token;
 }

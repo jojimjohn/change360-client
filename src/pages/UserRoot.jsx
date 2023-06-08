@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useLoaderData, useSubmit } from 'react-router-dom';
+import { Outlet, useLoaderData, useNavigate } from 'react-router-dom';
 import { Box } from "@mui/material";
 
-import { getTokenDuration } from '../utils/auth';
+import { checkAuthLoader, getTokenDuration } from '../utils/auth';
+import { useAuth } from '../utils/auth';
 
 import FeedbackModal from "../components/feedback/FeedbackModal";
 import { RewardPointsProvider } from '../components/rewards/RewardsProvider';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useWallet } from "../components/walletconnect/WalletContext";
 
-const UserRootLayout = ({ userId, apiUrl }) => {
-
-
+const UserRootLayout = ({ apiUrl }) => {
   const token = useLoaderData();
-  const submit = useSubmit();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const { handleDisconnect } = useWallet();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -23,27 +25,22 @@ const UserRootLayout = ({ userId, apiUrl }) => {
 
 
   useEffect(() => {
-    if (!token) {
-      return;
-    }
-
-    if (token === 'EXPIRED') {
-      submit(null, { action: '/logout', method: 'post' });
-      return;
-    }
-
+    checkAuthLoader();
     const tokenDuration = getTokenDuration();
-    console.log(tokenDuration);
-
-    setTimeout(() => {
-      submit(null, { action: '/logout', method: 'post' });
+    if (tokenDuration < 0) {
+     // handleDisconnect();
+     // navigate('/auth');
+    }
+    const timeout = setTimeout(() => {
+    //  handleDisconnect();
+   //   navigate('/auth');
     }, tokenDuration);
-  }, [token, submit]);
-
+    return () => clearTimeout(timeout);
+  }, [token]);
 
   return (
     <>
-    <RewardPointsProvider userId={userId} apiUrl={apiUrl}>      
+    <RewardPointsProvider userId={user} apiUrl={apiUrl}>      
           <Header />
           <Sidebar />
           <Box
@@ -62,7 +59,7 @@ const UserRootLayout = ({ userId, apiUrl }) => {
           >
             <Outlet />
           </Box>
-          <FeedbackModal userId={userId} apiUrl={apiUrl} />
+          <FeedbackModal userId={user} apiUrl={apiUrl} />
     </RewardPointsProvider>
     
     </>
