@@ -58,7 +58,7 @@ function Header() {
                 </a>
               </li>
               <li>
-                {/* <a href="#plans" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Plans</a> */}
+                <a href="/user/plans" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Plans</a>
               </li>
               {/* <li>
                 <a href="#timeline" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Roadmap</a>
@@ -104,15 +104,15 @@ function Header() {
                     How it Works
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#timeline" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Roadmap</a>
-                </li>
+                </li> */}
                 <li>
-                  {/* <Link to="/blog" className="flex text-gray-300 hover:text-gray-200 py-2">Blog</Link> */}
+                  <Link to="/user/plans" className="flex text-gray-300 hover:text-gray-200 py-2">Plans</Link>
                 </li>
-                <li>
-                  {/* <Link to="/about" className="flex text-gray-300 hover:text-gray-200 py-2">About us</Link> */}
-                </li>
+                {/* <li>
+                  <Link to="/about" className="flex text-gray-300 hover:text-gray-200 py-2">About us</Link>
+                </li> */}
                 <li className="py-2 my-2 border-t border-b border-gray-700">
                   {/* <span className="flex text-gray-300 py-2">Support</span> */}
                   <ul className="pl-4">
