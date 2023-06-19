@@ -38,9 +38,10 @@ function Home() {
           <FeaturesBlocks />
           <FeaturesZigZag />
           {/* <Plans /> */}
-          <Timeline />
+          {/* <Timeline /> */}
           {/* <Testimonials /> */}
-          <Newsletter />
+          <div class="ml-form-embed" data-account="1919516:v0m2w9s2z4" data-form="5900469:a9i0l5"></div>
+          {/* <Newsletter /> */}
         </main>
 
         {/*  Site footer */}
