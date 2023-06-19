@@ -31,7 +31,7 @@ function FeaturesBlocks() {
                 Tired of feeling defeated by your health and fitness journey? Have you tried countless diets and exercise programs without seeing the desired results? You're not alone. Discover how CHANGE 360 is revolutionizing the health and wellness industry and helping people just like you achieve their goals.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Ready to Break free?
               </a>
             </div>
@@ -47,7 +47,7 @@ function FeaturesBlocks() {
                 It's no secret that many of us struggle with our health and wellness. Busy lives, lack of motivation, and conflicting information about nutrition and exercise often lead to plateaus and discouragement. We understand the frustration, and we're here to help you overcome these challenges with CHANGE 360.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Overcome your challenges?
               </a>
             </div>
@@ -63,7 +63,7 @@ function FeaturesBlocks() {
                 We get it – life gets in the way, and finding time and energy to prioritize your health is difficult. Let us empathize with your struggles and show you that CHANGE 360 is the solution you've been searching for. Imagine waking up every day with the energy and confidence to take on the world. We're here to help you achieve that.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Embrace a Healthier Lifestyle?
               </a>
             </div>
@@ -79,7 +79,7 @@ function FeaturesBlocks() {
                 CHANGE 360 is an AI-powered health and fitness platform that provides personalized meal plans, exercise programs, and insights to help you achieve your goals. We've taken the guesswork out of health and wellness, so you can focus on your journey to a healthier you. Designed for your busy lifestyle, CHANGE 360 enables you to reach your goals without sacrificing your time.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Discover the Future of Fitness?
               </a>
             </div>
@@ -95,7 +95,7 @@ function FeaturesBlocks() {
                 With CHANGE 360's AI technology, you'll have access to the most up-to-date, scientifically supported information, cross-referenced with thousands of health and wellness modalities. Gone are the days when your local gym trainer was your only source of information. You now have a personal health and wellness AI assistant at your fingertips, ensuring you stay on track.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Unlock Your Personal AI Assistant?
               </a>
             </div>
@@ -111,7 +111,7 @@ function FeaturesBlocks() {
                 At the heart of CHANGE 360 is our commitment to transforming your health and wellness journey. We're here to guide you every step of the way, providing the support and tools you need to succeed. Our platform delivers results, and we're confident that you'll feel the benefits in every aspect of your life.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Transform Your Life Today?
               </a>
             </div>
@@ -125,7 +125,7 @@ function FeaturesBlocks() {
                 Getting started with CHANGE 360 is easy. First, complete a comprehensive assessment to determine your unique needs and goals. Then, receive personalized meal plans, exercise programs, and insights to help you achieve your objectives. Our AI technology adapts to your progress, ensuring you're always making strides towards your fitness goals.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Ready for a Personalized Plan?
               </a>
             </div>
@@ -141,7 +141,7 @@ function FeaturesBlocks() {
                 With CHANGE 360, you'll gain more than just a healthier body. You'll gain confidence, energy, and a new outlook on life. Earn rewards and tokens for your achievements, and become part of a community of individuals who share your passion for health and wellness. Invest in yourself today and take the first step towards a healthier you.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Gain Confidence and Energy?
               </a>
             </div>
@@ -157,7 +157,7 @@ function FeaturesBlocks() {
                 We're confident that you'll see results with CHANGE 360, but we also understand that trying something new can be daunting. That's why we make it easy and risk-free to cancel at any time. Pay only for what you need and use, and access a 1-click cancellation option if you wish to stop using our subscription services. We want your success, not just your money.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Experience Risk-Free Results?
               </a>
             </div>
@@ -173,7 +173,7 @@ function FeaturesBlocks() {
                 You know the benefits of CHANGE 360, you understand how it works, and you know that we stand behind our product. It's time to take action and invest in yourself. With our platform, you'll have everything you need to transform your health and wellness journey. Don't wait any longer – start making positive changes today. Sign up for CHANGE 360 now and unlock your full potential.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Join the CHANGE 360 Revolution?
               </a>
             </div>
@@ -201,7 +201,7 @@ function FeaturesBlocks() {
                 <i>"As a busy dad of three, I thought I'd never have the time or energy to prioritize my health. CHANGE 360 changed all that. Now, I'm healthier, happier, and able to keep up with my kids. Thank you, CHANGE 360!"</i> - Mark, 38
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Are you next?
               </a>
             </div>
@@ -217,7 +217,7 @@ function FeaturesBlocks() {
                 Don't let another day go by without taking control of your health and wellness. Start your journey with CHANGE 360 today, and experience the difference a personalized, AI-powered platform can make. Remember, the sooner you start, the sooner you'll see results.
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Start Now!
               </a>
             </div>
@@ -233,7 +233,7 @@ function FeaturesBlocks() {
                 Are you ready to make a change? Sign up for CHANGE 360 now and embark on the journey to a healthier, happier you. Your future self will thank you. Join our growing community and start transforming your life today!
               </p>
               <br/>
-              <a href="/signup" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
+              <a href="/user" className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button">
                 Transform!
               </a>
             </div>
