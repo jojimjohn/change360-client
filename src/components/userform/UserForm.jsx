@@ -46,9 +46,33 @@ const UserForm = ({ handleNext, closeModal }) => {
   const [response, setResponse] = useState(null);
   //const [error, setError] = useState(null);
 
+  const [nameError, setNameError] = useState(false);
+  const [genderError, setGenderError] = useState(false);
+  const [heightError, setHeightError] = useState(false);
+  const [weightError, setWeightError] = useState(false);
+  const [curFitnessLevelError, setCurFitnessLevelError] = useState(false);
+  const [curFitnessGoalError, setCurFitnessGoalError] = useState(false);
+  const [curExerciseError, setCurExerciseError] = useState(false);
+  const [dailyActivityError, setDailyActivityError] = useState(false);
+  
   const submitHandler = (event) => {
     event.preventDefault();
-    setShowOverlay(true); 
+
+    // Check if any required fields are empty
+    if (!name || !gender || !height || !weight || !curFitnessLevel || !curFitnessGoal || !curExercise || !dailyActivity) {
+      // Set error messages for the empty fields
+      setNameError(!name);
+      setGenderError(!gender);
+      setHeightError(!height);
+      setWeightError(!weight);
+      setCurFitnessLevelError(!curFitnessLevel);
+      setCurFitnessGoalError(!curFitnessGoal);
+      setCurExerciseError(!curExercise);
+      setDailyActivityError(!dailyActivity);
+      return; // Stop form submission
+    }
+
+    setShowOverlay(true);
     const modalOverlay = document.querySelector('.modal-overlay');
     if (modalOverlay) {
       modalOverlay.style.display = 'none';
@@ -111,20 +135,26 @@ const UserForm = ({ handleNext, closeModal }) => {
     setDailyActivity(value);
   }
 
-  return (
+    return (
     <>
-    <Box sx={{ p: 2, width: { xl: '80%' }  }} m="auto">
+      <Box sx={{ p: 2, width: { xl: '80%' } }} m="auto">
         <Typography variant="h5" className="text-center">Step 1: Provide General Information</Typography>
-     <Box component="form" onSubmit={submitHandler} sx={{ mt: 2, backgroundImage: `url(${backgroundLogo})`, backgroundPosition: `center center`, backgroundRepeat: "no-repeat", backgroundSize: "contain" }}>
-        <Grid container item flexDirection={"column"} alignItems="center">
-          <TextField sx={{ width: 200 }} value={name} onChange={(e) => {setName(e.target.value); }} label="Name"  variant="standard" />
-          <Grid item sx={{ marginTop: 1.5 }}>
-            <Typography gutterBottom> Gender </Typography>
+        <Box component="form" onSubmit={submitHandler} sx={{ mt: 2, backgroundImage: `url(${backgroundLogo})`, backgroundPosition: `center center`, backgroundRepeat: "no-repeat", backgroundSize: "contain" }}>
+          <Grid container item flexDirection={"column"} alignItems="center">
+            <TextField
+              sx={{ width: 200 }}
+              value={name}
+              onChange={(e) => { setName(e.target.value); }}
+              label="Name"
+              variant="standard"
+              error={nameError}
+              helperText={nameError && 'Please fill out this field'}
+            />
+            <Grid item sx={{ marginTop: 1.5 }}>
+              <Typography gutterBottom>Gender</Typography>
               <RadioGroup
                 row
-                onChange={(e) => {
-                  setGender(e.target.value); 
-                }}
+                onChange={(e) => { setGender(e.target.value); }}
                 value={gender}
               >
                 <FormControlLabel
@@ -138,57 +168,73 @@ const UserForm = ({ handleNext, closeModal }) => {
                   label="Female"
                 />
               </RadioGroup>
-
+              {genderError && (
+                <Typography variant="caption" color="error">
+                  Please select a gender
+                </Typography>
+              )}
+            </Grid>
+            <SlidingRange getAge={getAge} />
+            <HeightRange getHeightUnit={getHeightUnit} getHeight={getHeight} />
+            <WeightRange getWeightUnit={getWeightUnit} getWeight={getWeight} />
+            <DropdownList
+              getOption={getCurFitnessLevel}
+              placeholder="What is your current fitness level?"
+              useList={constants.fitnessLevels}
+              error={curFitnessLevelError}
+              helperText={curFitnessLevelError && 'Please fill out this field'}
+            />
+            <DropdownList
+              getOption={getCurFitnessGoal}
+              placeholder="From the options below what best describes your current and singular health and fitness goal?"
+              useList={constants.fitnessGoals}
+              error={curFitnessGoalError}
+              helperText={curFitnessGoalError && 'Please fill out this field'}
+            />
+            <DropdownList
+              getOption={getCurExercise}
+              placeholder="How much purposeful exercise do you currently get per week?"
+              useList={constants.currentExercises}
+              error={curExerciseError}
+              helperText={curExerciseError && 'Please fill out this field'}
+            />
+            <DropdownList
+              getOption={getDailyActivity}
+              placeholder="How much activity do you get daily, outside of purposeful exercise?"
+              useList={constants.dailyActivities}
+              error={dailyActivityError}
+              helperText={dailyActivityError && 'Please fill out this field'}
+            />
           </Grid>
-          <SlidingRange getAge={getAge} />
-          <HeightRange getHeightUnit={getHeightUnit} getHeight={getHeight} />
-          <WeightRange getWeightUnit={getWeightUnit} getWeight={getWeight} />
-          <DropdownList
-            getOption={getCurFitnessLevel}
-            placeholder="What is your current fitness level?"
-            useList={constants.fitnessLevels}
-          />
-          <DropdownList
-            getOption={getCurFitnessGoal}
-            placeholder="From the options below what best describes your current and singular health and fitness goal?"
-            useList={constants.fitnessGoals}
-          />
-          <DropdownList
-            getOption={getCurExercise}
-            placeholder="How much purposeful exercise do you currently get per week?"
-            useList={constants.currentExercises}
-          />
-          <DropdownList
-            getOption={getDailyActivity}
-            placeholder="How much activity do you get daily, outside of purposeful exercise?"
-            useList={constants.dailyActivities}
-          />
-        </Grid>
-      <br />
-      <Box textAlign='center'>
-        <Button type="submit" variant="contained" disabled={isLoading || response != null} color="primary" style={{ fontSize: "1.5em" }}>
-        {isLoading ? <CircularProgress size={24} /> : 'Continue to Step 2'}
-        </Button>
+          <br />
+          <Box textAlign="center">
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={isLoading || response != null}
+              color="primary"
+              style={{ fontSize: "1.5em" }}
+            >
+              {isLoading ? <CircularProgress size={24} /> : 'Continue to Step 2'}
+            </Button>
+          </Box>
+          {showOverlay && (
+            <ConfirmInfoOverlay
+              name={name}
+              age={age}
+              gender={gender}
+              height={height}
+              weight={weight}
+              curFitnessLevel={curFitnessLevel}
+              curFitnessGoal={curFitnessGoal}
+              curExercise={curExercise}
+              dailyActivity={dailyActivity}
+              toggleOverlay={toggleOverlayHandler}
+              onConfirm={onConfirmHandler}
+            />
+          )}
+        </Box>
       </Box>
-      {showOverlay && (
-          <ConfirmInfoOverlay
-            name={name}
-            age={age}
-            gender={gender}
-            height={height}
-            weight={weight}
-            curFitnessLevel={curFitnessLevel}
-            curFitnessGoal={curFitnessGoal}
-            curExercise={curExercise}
-            dailyActivity={dailyActivity}
-            toggleOverlay={toggleOverlayHandler}
-            onConfirm={onConfirmHandler}
-          />
-        )}
-
-    
-    </Box>
-    </Box>
     </>
   );
 };

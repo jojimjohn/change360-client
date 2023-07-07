@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import Typography from '@mui/material/Typography';
 
 export default function DropdownList(props) {
   const handleChange = (selectedOption) => {
@@ -40,11 +41,18 @@ export default function DropdownList(props) {
   };
 
   return (
-    <Select
-      options={options}
-      placeholder={props.placeholder}
-      onChange={handleChange}
-      styles={customStyles} // Apply the custom styles
-    />
+    <div>
+      <Select
+        options={options}
+        placeholder={props.placeholder}
+        onChange={handleChange}
+        styles={customStyles} // Apply the custom styles
+      />
+      {props.error && (
+        <Typography variant="caption" color="error">
+          Please fill out this field
+        </Typography>
+      )}
+    </div>
   );
 }
