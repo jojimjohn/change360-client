@@ -29,7 +29,7 @@ import ConfirmInfoOverlay from './ConfirmInfoOverlay';
 
 import backgroundLogo from '../../images/logo-semi-transparent.png';
 
-const UserForm = ({ handleNext }) => {    
+const UserForm = ({ handleNext, closeModal }) => {    
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState(25);
@@ -48,16 +48,14 @@ const UserForm = ({ handleNext }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-   
-  //  toggleOverlayHandler();
-   
-   setShowOverlay(true); 
+    setShowOverlay(true); 
+    const modalOverlay = document.querySelector('.modal-overlay');
+    if (modalOverlay) {
+      modalOverlay.style.display = 'none';
+    }
   };
   
   const onConfirmHandler = () =>{
-
- //   setIsLoading(true);
-
     const genData = JSON.stringify({
       address: "0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f",
       nickname: name,
@@ -78,6 +76,7 @@ const UserForm = ({ handleNext }) => {
   // ResponseDate =genData;
     // Move to the next step
     handleNext(genData);
+    closeModal();
   }
 
   const toggleOverlayHandler = () => {
@@ -168,7 +167,7 @@ const UserForm = ({ handleNext }) => {
       <br />
       <Box textAlign='center'>
         <Button type="submit" variant="contained" disabled={isLoading || response != null} color="primary" style={{ fontSize: "1.5em" }}>
-        {isLoading ? <CircularProgress size={24} /> : 'Get Started'}
+        {isLoading ? <CircularProgress size={24} /> : 'Continue to Step 2'}
         </Button>
       </Box>
       {showOverlay && (

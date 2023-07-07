@@ -42,11 +42,6 @@ function HeroHome() {
               Weekly accountability coaching, and cryptocurrency rewards, all designed to help you reach your goals. Get started right away by filling the form below!
             </p>
           </div>
-
-          {/* Hero form */}
-          <div>
-            <UserForm />
-          </div>
         </div>
       </div>
     </section>
