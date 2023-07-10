@@ -62,7 +62,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to the payment completion page
-        return_url: "http://localhost:5173",
+        return_url: "https://change360-v1.web.app/",
       },
     });
 
