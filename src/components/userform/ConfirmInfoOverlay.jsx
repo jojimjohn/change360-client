@@ -24,12 +24,17 @@ const ConfirmInfoOverlay = ({
     const [open, setOpen] = useState(true);
 
     const handleConfirm = () => {
-        setOpen(false);
-        toggleOverlay();
-        onConfirm();
+        window.location.href = '/user'; // Continue to Step 2
+        // setOpen(false);
+        // toggleOverlay();
+        // onConfirm();
     };
 
     const handleCancel = () => {
+        const modalOverlay = document.querySelector('.modal-overlay');
+        if (modalOverlay) {
+            modalOverlay.style.display = 'flex';
+        }
         setOpen(false);
         toggleOverlay();
         // onCancel();
@@ -105,7 +110,7 @@ const ConfirmInfoOverlay = ({
             </DialogContent>
             <DialogActions>
                 <Button variant="contained" color="secondary" onClick={handleCancel}>
-                    Cancel
+                    Edit
                 </Button>
                 <Button variant="contained" color="primary" onClick={handleConfirm}>
                     Confirm

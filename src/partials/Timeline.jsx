@@ -200,7 +200,7 @@ function Timeline() {
                 className="vertical-timeline-element--work"
                 contentStyle={{ background: 'rgb(191, 94, 56)', color: '#fff' }}
                 contentArrowStyle={{ borderRight: '26px solid rgb(191, 94, 56)' }}
-                date="(Phase 3)"
+                date="(Phase 4)"
                 iconStyle={{ background: 'rgb(191, 94, 56)', color: '#fff' }}
                 icon={<img src={timeline_gym} />}
               >
@@ -213,7 +213,7 @@ function Timeline() {
                 className="vertical-timeline-element--work"
                 contentStyle={{ background: 'rgb(191, 94, 56)', color: '#fff' }}
                 contentArrowStyle={{ borderRight: '26px solid rgb(191, 94, 56)' }}
-                date="(Phase 3)"
+                date="(Phase 4)"
                 iconStyle={{ background: 'rgb(191, 94, 56)', color: '#fff' }}
                 icon={<img src={timeline_wellness} />}
               >
@@ -226,7 +226,7 @@ function Timeline() {
                 className="vertical-timeline-element--work"
                 contentStyle={{ background: 'rgb(191, 94, 56)', color: '#fff' }}
                 contentArrowStyle={{ borderRight: '26px solid rgb(191, 94, 56)' }}
-                date="(Phase 3)"
+                date="(Phase 4)"
                 iconStyle={{ background: 'rgb(191, 94, 56)', color: '#fff' }}
                 icon={<img src={timeline_blockchain} />}
               >

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import ReactFbq from 'react-fbq';
 
 import Header from '../partials/Header';
 import PageIllustration from '../partials/PageIllustration';
@@ -11,9 +12,12 @@ import Testimonials from '../partials/Testimonials';
 import Newsletter from '../partials/Newsletter';
 import Footer from '../partials/Footer';
 
-//import PageContent from '../components/PageContent';
-
 function Home() {
+  useEffect(() => {
+    ReactFbq.initialize({ id: '1248511849106047' });
+    ReactFbq.pageView();
+  }, []);
+
   return (
     <>
     {/* <PageContent title="C.H.A.N.G.E. 360">
@@ -33,10 +37,11 @@ function Home() {
           <HeroHome />
           <FeaturesBlocks />
           <FeaturesZigZag />
-          <Plans />
-          <Timeline />
+          {/* <Plans /> */}
+          {/* <Timeline /> */}
           {/* <Testimonials /> */}
-          <Newsletter />
+          <div class="ml-form-embed" data-account="1919516:v0m2w9s2z4" data-form="5900469:a9i0l5"></div>
+          {/* <Newsletter /> */}
         </main>
 
         {/*  Site footer */}

@@ -1,30 +1,58 @@
-import * as React from "react";
-import { Box, InputLabel, MenuItem, FormControl, Select } from "@mui/material";
+import React from 'react';
+import Select from 'react-select';
+import Typography from '@mui/material/Typography';
 
-export default function BasicSelect(props) {
-  const [option, setOption] = React.useState("");
+export default function DropdownList(props) {
+  const handleChange = (selectedOption) => {
+    props.getOption(selectedOption.value);
+  };
 
-  const handleChange = (event) => {
-    setOption(event.target.value);
-    props.getOption(event.target.value);
+  const options = props.useList.map((name) => ({
+    value: name,
+    label: name,
+  }));
+
+  // Custom styles for the dropdown
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.selectProps.menuIsOpen ? '#1f2937' : 'transparent',
+      borderColor: state.selectProps.menuIsOpen ? '#4a5568' : '#cbd5e0',
+      color: '#fff',
+      width: '500px',
+      boxShadow: state.selectProps.menuIsOpen ? '0 0 0 1px #4a5568' : 'none',
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#2d3748' : state.isFocused ? '#4a5568' : 'transparent',
+      color: state.isSelected ? '#fff' : '#cbd5e0',
+      ':active': {
+        backgroundColor: '#2d3748',
+      },
+    }),
+    menu: (provided) => ({
+      ...provided,
+      backgroundColor: '#1f2937',
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: '#fff',
+    }),
   };
 
   return (
-    <Box sx={{ margin: 1, width: 700 }}>
-      <FormControl fullWidth>
-        <InputLabel>{props.placeholder}</InputLabel>
-        <Select
-          value={option}
-          label={props.placeholder}
-          onChange={handleChange}
-        >
-          {props.useList.map((name) => (
-            <MenuItem key={name} value={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Box>
+    <div>
+      <Select
+        options={options}
+        placeholder={props.placeholder}
+        onChange={handleChange}
+        styles={customStyles} // Apply the custom styles
+      />
+      {props.error && (
+        <Typography variant="caption" color="error">
+          Please fill out this field
+        </Typography>
+      )}
+    </div>
   );
 }
