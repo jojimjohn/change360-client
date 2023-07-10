@@ -77,7 +77,8 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Dashboard apiUrl={apiUrl}/>,
+           // element: <Dashboard apiUrl={apiUrl}/>,
+            element: <NewPlanPage userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} />,
           //  loader: checkAuthLoader,
           },  
           {
