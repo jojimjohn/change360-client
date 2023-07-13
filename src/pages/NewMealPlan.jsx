@@ -20,6 +20,7 @@ const NewPlan = ({ userId, apiUrl }) => {
 
     useEffect(() => {
       console.log(pageId);
+      console.log(responseData);
       if (parseInt(pageId, 10) == 1 || parseInt(pageId, 10) == 2) {
       setActiveStep(parseInt(pageId, 10)); 
       }
@@ -58,9 +59,9 @@ const NewPlan = ({ userId, apiUrl }) => {
       case 1:
         return <UserConnect userInfo={responseData} handleNext={handleNext} apiUrl={apiUrl} />;
       case 2:
-        return <WelcomeResponse userInfo={responseData} handleNext={handleNext} apiUrl={apiUrl} />;
+        return <WelcomeResponse userId={userId} handleNext={handleNext} apiUrl={apiUrl} />;
       case 3:
-        return <ProvideDietInfo userId={responseData}  handleNext={handleNext} />;
+        return <ProvideDietInfo userId={userId}  handleNext={handleNext} />;
       case 4:
         return  <RewardPointsProvider userId={userId} apiUrl={apiUrl} >
                   <DisplayMealPlan userInfo={responseData}  handleNext={handleNext} apiUrl={apiUrl} />

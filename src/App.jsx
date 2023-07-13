@@ -78,12 +78,12 @@ const router = createBrowserRouter([
           {
             path: 'newplan',
            // element: <Dashboard apiUrl={apiUrl}/>,
-           element: (<NewPlanPage userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} />),
+           element: (<NewPlanPage userId='0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f' apiUrl={apiUrl} />),
           //  loader: checkAuthLoader,
           children: [
             {
               path: ':pageId',
-              element: <NewPlanPage userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} />,
+              element: <NewPlanPage userId='0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f' apiUrl={apiUrl} />,
             },  
           ],
           },  
@@ -98,7 +98,7 @@ const router = createBrowserRouter([
                {
                 path: 'buy',
                 element: (
-                  <RewardPointsProvider userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl}>
+                  <RewardPointsProvider userId='0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f' apiUrl={apiUrl}>
                     <BuyPlanPage />
                   </RewardPointsProvider>
                 ),
@@ -112,7 +112,7 @@ const router = createBrowserRouter([
           },    
           {
             path: 'rewards',
-            element: <RewardsPage userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} />
+            element: <RewardsPage userId='0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f' apiUrl={apiUrl} />
           },      
         ],
       },

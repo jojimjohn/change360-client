@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 import logo from '../../images/logo.png';
 
-const WelcomeResponse = ({ userInfo, handleNext, apiUrl  }) => {
+const WelcomeResponse = ({ userId, handleNext, apiUrl  }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
@@ -30,18 +30,15 @@ const WelcomeResponse = ({ userInfo, handleNext, apiUrl  }) => {
   };
 
   useEffect(() => {
- 
-    if (userInfo) {
+    if (userId) {
       const fetchData = async () => {
         setIsLoading(true);
 
         try {
-            // Send a POST request to the backend to save the user's dietary information
             // Get the welcome message from the OpenAI API
-            //${process.env.REACT_APP_BASE_API_URL}
-            const response = await fetch(`${apiUrl}/users`, {
+            const response = await fetch(`${apiUrl}/ai/init`, {
               method: 'POST',
-              body: userInfo,
+              body: JSON.stringify({ userId: userId, }),
               headers: { 'Content-Type': 'application/json' },
             });
         
@@ -70,7 +67,7 @@ const WelcomeResponse = ({ userInfo, handleNext, apiUrl  }) => {
       };
       fetchData();
     }
-  }, [userInfo]);
+  }, [userId]);
 
   return (
     <Box className="relative max-w-6xl mx-auto h-0" textAlign='center' m="auto">
