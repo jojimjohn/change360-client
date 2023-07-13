@@ -70,7 +70,7 @@ const Sidebar = () => {
       const renderMenuItems = () => (
         <>
           <SidebarMenuItem
-            to="/user"
+            to="/user/newplan"
             icon={<DashboardIcon />}
             text="Meal Plan"
           />
