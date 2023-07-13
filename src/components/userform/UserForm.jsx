@@ -100,7 +100,6 @@ const UserForm = ({ handleNext, closeModal }) => {
   // ResponseDate =genData;
     // Move to the next step
     handleNext(genData);
-    closeModal();
   }
 
   const toggleOverlayHandler = () => {

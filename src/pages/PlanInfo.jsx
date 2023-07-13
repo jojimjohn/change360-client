@@ -30,7 +30,7 @@ const PlanInfo = ({ userId, apiUrl }) => {
   // const address = JSON.parse(localStorage.getItem('address')).address;
   //const address = '0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f';
   useEffect(() => {
-    setMealPlan(walletAddress); // TEMP storing some value - correct it
+   // setMealPlan(walletAddress); // TEMP storing some value - correct it
     // Retrieve user information and preferences
     const fetchUser = async () => {
       try {
@@ -144,18 +144,6 @@ function updatePaymentIntent(plan) {
     }
   };
 
-  
-  const handlePurchasePlan = async (event) => {
-    event.preventDefault();
-
-    const jsonData = {
-      // address
-    };
-    //  navigate('/user/01/buy');
-
-  
-  };
-
   return (
 
     <Container maxWidth="lg" sx={{ marginTop: '100px' }}>
@@ -220,7 +208,7 @@ function updatePaymentIntent(plan) {
           <div className="max-w-sm mx-auto grid gap-8 lg:grid-cols-3 lg:gap-6 items-start lg:max-w-none">
 
           {/* 1st plan */}
-          <div className="flex flex-col h-full p-6 bg-gray-600 plan-outline" data-aos="fade-up">
+          <div className="flex flex-col h-full p-6" data-aos="fade-up">
             <div>
               <div className="relative inline-flex flex-col mb-4">
                 <div className="plan">
@@ -255,7 +243,7 @@ function updatePaymentIntent(plan) {
             {paymentOption === 'card' && clientSecret && (
               <Box sx={{ mt: 3 }}>
                 <Elements options={options} stripe={stripePromise}>
-                  <CheckoutForm />
+                  <CheckoutForm apiUrl={apiUrl} clientSecret={clientSecret} />
                 </Elements>
               </Box>
             )}

@@ -20,6 +20,8 @@ const WelcomeResponse = ({ userInfo, handleNext, apiUrl  }) => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
+  localStorage.removeItem('paymentIntentId');  // Clear payment intent id from local storage
+  
   const submitHandler = (event) => {
     event.preventDefault();
    

@@ -13,9 +13,13 @@ import features_take_action_today from '../images/features-take-action-today.jpg
 import features_satisfied_customer from '../images/features-satisfied-customer.jpg';
 import features_start_journey from '../images/features-start-journey.jpg';
 import features_transform_now from '../images/features-transform-now.jpg';
+import { useNavigate } from 'react-router-dom';
 
 function FeaturesBlocks() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [responseData, setResponse] = useState(null);
+  const navigate = useNavigate();
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -24,6 +28,17 @@ function FeaturesBlocks() {
         modalOverlay.style.display = 'flex';
     }
   };
+
+  const handleNext = (responseData) => {
+    setResponse(responseData);
+
+     // Store form data in localStorage
+     localStorage.setItem('formData', JSON.stringify(responseData));
+
+     // Redirect to the NewMealPlan page
+     navigate('/user/newplan/1');
+  };
+
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -264,7 +279,7 @@ function FeaturesBlocks() {
             <button className="modal-close" onClick={closeModal}>
               &times;
             </button>
-            <UserForm closeModal={closeModal} />
+            <UserForm closeModal={closeModal}  handleNext={handleNext} />
           </div>
         </div>
       )}

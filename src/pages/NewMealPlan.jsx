@@ -1,17 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import { Stepper, Step, StepLabel } from '@mui/material';
 import GeneralInfoForm from '../components/userform/UserForm';
+import UserConnect from '../components/userform/UserSubscription';
 import WelcomeResponse from '../components/userform/WelcomeResponse';
 import ProvideDietInfo from '../components/userform/ProvideDietInfo';
 import DisplayMealPlan from '../components/userform/DisplayMealPlan';
 
-import { RewardPointsProvider } from '../components/rewards/RewardsProvider';
+//import { RewardPointsProvider } from '../components/rewards/RewardsProvider';
 
-const steps = ['General Information', 'Welcome Response', 'Dietary Information', 'Your Meal Plan'];
+const steps = ['General Information', 'Plan Subscription', 'Welcome Response', 'Dietary Information', 'Your Meal Plan'];
 
 const NewPlan = ({ userId, apiUrl }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [responseData, setResponse] = useState(null);
+  const [formData, setFormData] = useState(null);
+
+  const { pageId } = useParams();
+
+    useEffect(() => {
+      console.log(pageId);
+      if (parseInt(pageId, 10) == 1 || parseInt(pageId, 10) == 2) {
+      setActiveStep(parseInt(pageId, 10)); 
+      }
+     // handleNext(userId);
+    
+    }, []);
+  
+    useEffect(() => {
+      // Retrieve form data from localStorage
+      const storedFormData = localStorage.getItem('formData');
+      if (storedFormData) {
+        setResponse(JSON.parse(storedFormData));
+        // Remove form data from localStorage if it's no longer needed
+        localStorage.removeItem('formData');
+      }
+    }, []);
 
   const handleNext = (responseData) => {
     setResponse(responseData);
@@ -32,15 +56,17 @@ const NewPlan = ({ userId, apiUrl }) => {
       case 0:
         return <GeneralInfoForm handleNext={handleNext} />;
       case 1:
-        return <WelcomeResponse userInfo={responseData} handleNext={handleNext} apiUrl={apiUrl} />;
+        return <UserConnect userInfo={responseData} handleNext={handleNext} apiUrl={apiUrl} />;
       case 2:
-        return <ProvideDietInfo userId={responseData}  handleNext={handleNext} />;
+        return <WelcomeResponse userInfo={responseData} handleNext={handleNext} apiUrl={apiUrl} />;
       case 3:
+        return <ProvideDietInfo userId={responseData}  handleNext={handleNext} />;
+      case 4:
         return  <RewardPointsProvider userId={userId} apiUrl={apiUrl} >
                   <DisplayMealPlan userInfo={responseData}  handleNext={handleNext} apiUrl={apiUrl} />
                 </RewardPointsProvider>;
       default:
-        return 'Unknown step';
+        return <GeneralInfoForm handleNext={handleNext} />;
     }
   };
 
