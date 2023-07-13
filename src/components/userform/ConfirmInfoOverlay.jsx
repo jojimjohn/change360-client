@@ -24,10 +24,10 @@ const ConfirmInfoOverlay = ({
     const [open, setOpen] = useState(true);
 
     const handleConfirm = () => {
-        window.location.href = '/user'; // Continue to Step 2
-        // setOpen(false);
-        // toggleOverlay();
-        // onConfirm();
+       // window.location.href = '/user'; // Continue to Step 2
+         setOpen(false);
+         toggleOverlay();
+         onConfirm();
     };
 
     const handleCancel = () => {
