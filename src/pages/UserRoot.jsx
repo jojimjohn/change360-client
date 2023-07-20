@@ -9,13 +9,13 @@ import FeedbackModal from "../components/feedback/FeedbackModal";
 import { RewardPointsProvider } from '../components/rewards/RewardsProvider';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import { useWallet } from "../components/walletconnect/WalletContext";
+//import { useWallet } from "../components/walletconnect/WalletContext";
 
 const UserRootLayout = ({ apiUrl }) => {
   const token = useLoaderData();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { handleDisconnect } = useWallet();
+ // const { handleDisconnect } = useWallet();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -40,7 +40,7 @@ const UserRootLayout = ({ apiUrl }) => {
 
   return (
     <>
-    <RewardPointsProvider userId={user} apiUrl={apiUrl}>      
+    {/* <RewardPointsProvider userId={user} apiUrl={apiUrl}>       */}
           <Header />
           <Sidebar />
           <Box
@@ -60,7 +60,7 @@ const UserRootLayout = ({ apiUrl }) => {
             <Outlet />
           </Box>
           <FeedbackModal userId={user} apiUrl={apiUrl} />
-    </RewardPointsProvider>
+    {/* </RewardPointsProvider> */}
     
     </>
   );

@@ -23,19 +23,19 @@ import { GoogleLogin } from '@react-oauth/google';
 const Header = () => {
     const token = useRouteLoaderData('root');
 
-    const {
-        walletAddress,
-        isTokenApproved,
-        handleConnect,
-        handleDisconnect,
-        approveToken,
-        removeApproval,
-        active,
-        bnbBalance,
-        usdtBalance,
-        bnbPrice,
-        shortenAddress
-    } = useWallet();
+    // const {
+    //     walletAddress,
+    //     isTokenApproved,
+    //     handleConnect,
+    //     handleDisconnect,
+    //     approveToken,
+    //     removeApproval,
+    //     active,
+    //     bnbBalance,
+    //     usdtBalance,
+    //     bnbPrice,
+    //     shortenAddress
+    // } = useWallet();
 
     const [modalOpen, setModalOpen] = useState(false);
 

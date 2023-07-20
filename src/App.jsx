@@ -69,10 +69,10 @@ const router = createBrowserRouter([
         id: 'user',
         loader: tokenLoader,
         element: (
-          <AuthProvider>
-            <UserRootLayout apiUrl={apiUrl} />
-          </AuthProvider>
-       //   <UserRootLayout userId='640b5ebaf5dd1d0584ae8849' apiUrl={apiUrl} />
+          // <AuthProvider>
+          //   <UserRootLayout apiUrl={apiUrl} />
+          // </AuthProvider>
+          <UserRootLayout apiUrl={apiUrl} />
         ), 
         children: [
           {
