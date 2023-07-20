@@ -18,6 +18,7 @@ import {
 
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
+import { GoogleLogin } from '@react-oauth/google';
 
 const Header = () => {
     const token = useRouteLoaderData('root');
@@ -56,6 +57,13 @@ const Header = () => {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4
+    };
+
+    const responseMessage = (response) => {
+        console.log(response);
+    };
+    const errorMessage = (error) => {
+        console.log(error);
     };
 
     return (
@@ -109,7 +117,7 @@ const Header = () => {
                         display: 'flex',
                         alignItems: 'center'
                     }}>
-                    <Typography
+                    {/* <Typography
                         variant="body1"
                         sx={{
                             mr: 4,
@@ -271,8 +279,8 @@ const Header = () => {
                                 </Paper>
                             </Modal>
                         )
-                    }
-
+                    } */}
+                    <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
                 </Box>
             </Toolbar>
         </AppBar>
