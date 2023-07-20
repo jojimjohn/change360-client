@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 const SlidingRange = (props) => {
-    const [value, setValue] = useState(70);
+    const [value, setValue] = useState(null);
     const [unit, setUnit] = useState("kg");
     const [kgVariant, setkgVariant] = useState("contained");
     const [lbsVariant, setlbsVariant] = useState("outlined");
@@ -44,23 +44,29 @@ const SlidingRange = (props) => {
         if (newUnit === "kg") {
             setkgVariant("contained");
             setlbsVariant("outlined");
-            setValue(value * 2.205);
+            if (value) {
+                setValue(value * 2.205);
+            }
             setMin(35);
             setMax(220);
         } else {
             setkgVariant("outlined");
             setlbsVariant("contained");
-            setValue(value / 2.205);
+            if (value) {
+                setValue(value / 2.205);
+            }
             setMin(77);
             setMax(485);
         }
     };
 
+    const hideLabel = value !== null || (value === "" && document.activeElement !== document.getElementById("input-slider"));
+
     return (
         <Box sx={{
                 width: 500
             }}>
-            <Typography id="input-slider" gutterBottom="gutterBottom">
+            <Typography id="input-slider" gutterBottom style={{ display: hideLabel ? "none" : "block" }}>
                 Weight
             </Typography>
             <Grid container="container" spacing={2} alignItems="center">
@@ -69,7 +75,7 @@ const SlidingRange = (props) => {
                         sx={{
                             width: 164
                         }}
-                        value={value}
+                        value={value === null ? "" : value}
                         onChange={handleSliderChange}
                         aria-labelledby="input-slider"
                         step={1}
@@ -83,7 +89,7 @@ const SlidingRange = (props) => {
                             width: 70
                         }}
                         type="number"
-                        value={value}
+                        value={value === null ? "" : value}
                         onChange={handleInputChange}
                         onBlur={handleBlur}
                         label={`Weight (${unit})`}

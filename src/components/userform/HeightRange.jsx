@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 const SlidingRange = (props) => {
-  const [value, setValue] = useState(160);
+  const [value, setValue] = useState(null);
   const [unit, setUnit] = useState("cm");
   const [min, setMin] = useState(120);
   const [max, setMax] = useState(220);
@@ -44,28 +44,34 @@ const SlidingRange = (props) => {
     if (newUnit === "cm") {
       setMin(120);
       setMax(220);
-      setValue(value * 2.54);
+      if (value) {
+        setValue(value * 2.54);
+      }
       setInchVariant("outlined");
       setcmVariant("contained");
     } else {
       setMin(47);
       setMax(87);
-      setValue(value / 2.54);
+      if (value) {
+        setValue(value / 2.54);
+      }
       setInchVariant("contained");
       setcmVariant("outlined");
     }
   };
 
+  const hideLabel = value !== null || (value === "" && document.activeElement !== document.getElementById("input-slider"));
+
   return (
     <Box sx={{ width: 500 }}>
-      <Typography id="input-slider" gutterBottom>
+      <Typography id="input-slider" gutterBottom style={{ display: hideLabel ? "none" : "block" }}>
         Height
       </Typography>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
           <Slider
             sx={{ width: 164 }}
-            value={value}
+            value={value === null ? "" : value}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
             step={1}
@@ -78,7 +84,7 @@ const SlidingRange = (props) => {
           <TextField
             sx={{ width: 70 }}
             type="number"
-            value={value}
+            value={value === null ? "" : value}
             onChange={handleInputChange}
             onBlur={handleBlur}
             label={`Height (${unit})`}

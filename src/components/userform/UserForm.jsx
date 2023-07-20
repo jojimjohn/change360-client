@@ -32,10 +32,10 @@ import backgroundLogo from '../../images/logo-semi-transparent.png';
 const UserForm = ({ handleNext, closeModal }) => {    
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
-  const [age, setAge] = useState(25);
-  const [height, setHeight] = useState(140);
+  const [age, setAge] = useState(null);
+  const [height, setHeight] = useState(null);
   const [heightUnit, setHeightUnit] = useState("");
-  const [weight, setWeight] = useState("");
+  const [weight, setWeight] = useState(null);
   const [weightUnit, setWeightUnit] = useState("");
   const [curFitnessLevel, setCurFitnessLevel] = useState("");
   const [curFitnessGoal, setCurFitnessGoal] = useState("");
