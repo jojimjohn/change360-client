@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 
 const SlidingRange = (props) => {
+    const { error } = props;
     const [value, setValue] = useState(null);
     const [unit, setUnit] = useState("kg");
     const [kgVariant, setkgVariant] = useState("contained");
@@ -100,7 +101,10 @@ const SlidingRange = (props) => {
                             max: max,
                             type: "number",
                             "aria-labelledby" : "input-slider"
-                        }}/>
+                        }}
+                        error={error}
+                        helperText={error && 'Please fill out this field'}
+                />
                 </Grid>
                 <Grid item="item">
                     <Button size="small" variant={kgVariant} onClick={() => handleUnitChange("kg")}>

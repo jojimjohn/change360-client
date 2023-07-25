@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 
 const SlidingRange = (props) => {
+  const { error } = props;
   const [value, setValue] = useState(null);
   const [unit, setUnit] = useState("cm");
   const [min, setMin] = useState(120);
@@ -96,6 +97,8 @@ const SlidingRange = (props) => {
               type: "number",
               "aria-labelledby": "input-slider",
             }}
+            error={error}
+            helperText={error && 'Please fill out this field'}
           />
         </Grid>
         <Grid item>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TextField, Box, Grid, Slider, Typography } from "@mui/material";
 
 const SlidingRange = (props) => {
+  const { error } = props;
   const [value, setValue] = useState(null);
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
@@ -59,6 +60,8 @@ const SlidingRange = (props) => {
               type: "number",
               "aria-labelledby": "input-slider",
             }}
+            error={error}
+            helperText={error && 'Please fill out this field'}
           />
         </Grid>
       </Grid>
