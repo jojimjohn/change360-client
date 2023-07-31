@@ -63,9 +63,10 @@ const NewPlan = ({ userId, apiUrl }) => {
       case 3:
         return <ProvideDietInfo userId={userId}  handleNext={handleNext} />;
       case 4:
-        return  <RewardPointsProvider userId={userId} apiUrl={apiUrl} >
-                  <DisplayMealPlan userInfo={responseData}  handleNext={handleNext} apiUrl={apiUrl} />
-                </RewardPointsProvider>;
+        return <DisplayMealPlan userInfo={responseData}  handleNext={handleNext} apiUrl={apiUrl} />
+          //   return  <RewardPointsProvider userId={userId} apiUrl={apiUrl} >
+          //   <DisplayMealPlan userInfo={responseData}  handleNext={handleNext} apiUrl={apiUrl} />
+          // </RewardPointsProvider>;
       default:
         return <GeneralInfoForm handleNext={handleNext} />;
     }

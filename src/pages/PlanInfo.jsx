@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import UserInteract from './userInteract';
 
-import {useWallet} from "../components/walletconnect/WalletContext";
+//import {useWallet} from "../components/walletconnect/WalletContext";
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from "@stripe/react-stripe-js";
@@ -23,37 +23,10 @@ const PlanInfo = ({ userId, apiUrl }) => {
 
   const [clientSecret, setClientSecret] = useState("");
 
-    const {
-        walletAddress
-    } = useWallet();
+    // const {
+    //     walletAddress
+    // } = useWallet();
 
-  // const address = JSON.parse(localStorage.getItem('address')).address;
-  //const address = '0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f';
-  useEffect(() => {
-   // setMealPlan(walletAddress); // TEMP storing some value - correct it
-    // Retrieve user information and preferences
-    const fetchUser = async () => {
-      try {
-
-        // const response = await axios.get(`${apiUrl}/users/auth/${walletAddress}`);
-
-        // const userInfo = response.data.userInfo ;
-        // setUser(userInfo); // Set the user state variable with the response data
-
-    
-        // setError(null);
-
-
-      } catch (error) {
-            setError(error.message);
-            console.error(error);
-       }
-
-    };
-
-    fetchUser();
-  
-  }, [walletAddress]);
   
 //   useEffect(() => {
 //     // Get existing PaymentIntent id from local storage

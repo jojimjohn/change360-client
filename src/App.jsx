@@ -43,7 +43,7 @@ import AuthenticationPage, {
   action as authAction,
 } from './pages/Authentication';
 import { action as logoutAction } from './pages/Logout';
-import { AuthProvider, checkAuthLoader, tokenLoader } from './utils/auth';
+import { AuthProvider} from './utils/auth';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -59,7 +59,11 @@ const apiUrl = 'https://change360-v1.onrender.com/api';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: (
+      <AuthProvider>
+         <RootLayout />
+      </AuthProvider>
+    ), 
     errorElement: <ErrorPage />,
     id: 'root',
     children: [
@@ -67,19 +71,16 @@ const router = createBrowserRouter([
       {
         path: 'user',
         id: 'user',
-        loader: tokenLoader,
         element: (
-          // <AuthProvider>
-          //   <UserRootLayout apiUrl={apiUrl} />
-          // </AuthProvider>
-          <UserRootLayout apiUrl={apiUrl} />
+          <AuthProvider>
+             <UserRootLayout apiUrl={apiUrl} />
+          </AuthProvider>
         ), 
         children: [
           {
             path: 'newplan',
            // element: <Dashboard apiUrl={apiUrl}/>,
            element: (<NewPlanPage userId='0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f' apiUrl={apiUrl} />),
-          //  loader: checkAuthLoader,
           children: [
             {
               path: ':pageId',
@@ -98,16 +99,11 @@ const router = createBrowserRouter([
                {
                 path: 'buy',
                 element: (
-                  <RewardPointsProvider userId='0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f' apiUrl={apiUrl}>
+                 // <RewardPointsProvider userId='0x3c51C5bBa1111aA67Bd04D3fB7C282B49Cc32c7f' apiUrl={apiUrl}>
                     <BuyPlanPage />
-                  </RewardPointsProvider>
+                //  </RewardPointsProvider>
                 ),
               },
-              // {
-              //   path: 'success',
-              //   element: <BuySuccessPage />,
-              //   loader: checkAuthLoader,
-              // },
             ],
           },    
           {
@@ -119,7 +115,6 @@ const router = createBrowserRouter([
       {
         path: 'mealplan',
         element:  <UserRootLayout />,
-       //loader: checkAuthLoader,
         children: [
           {
             index: true,

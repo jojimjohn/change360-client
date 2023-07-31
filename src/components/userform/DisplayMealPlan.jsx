@@ -13,13 +13,13 @@ import {
 } from "@mui/material";
 import {Link} from "react-router-dom";
 
-import {addRewardPoints} from '../rewards/RewardsProvider';
+//import {addRewardPoints} from '../rewards/RewardsProvider';
 
 const DisplayMealPlan = ({userInfo, handleNext, apiUrl}) => {
 
-    useEffect(() => {
-        addRewardPoints('Meal Plan', 20);
-    }, []);
+    // useEffect(() => {
+    //     addRewardPoints('Meal Plan', 20);
+    // }, []);
 
     const [isLoading, setIsLoading] = useState(false);
     const [response, setResponse] = useState(null);

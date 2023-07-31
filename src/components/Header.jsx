@@ -1,8 +1,12 @@
-import React, {useState} from "react";
-import {Form, NavLink, useRouteLoaderData} from 'react-router-dom';
+import React, { useState, useEffect, useContext } from "react";
+import { NavLink } from 'react-router-dom';
+import { useAuth } from '../utils/auth';
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+
 import logo from '../images/logo.png';
 
-import {useWallet} from "./walletconnect/WalletContext";
+//import {useWallet} from "./walletconnect/WalletContext";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -18,11 +22,8 @@ import {
 
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
-import { GoogleLogin } from '@react-oauth/google';
 
 const Header = () => {
-    const token = useRouteLoaderData('root');
-
     // const {
     //     walletAddress,
     //     isTokenApproved,
@@ -59,12 +60,48 @@ const Header = () => {
         p: 4
     };
 
-    const responseMessage = (response) => {
-        console.log(response);
+    const { user, setUser, signOut } = useAuth();
+    const [ profile, setProfile ] = useState( localStorage.getItem('profile'));
+
+    const onGoogleLoginSuccess = async (googleResponse) => {
+        setUser(googleResponse);
     };
-    const errorMessage = (error) => {
-        console.log(error);
+    
+      
+    const login = useGoogleLogin({
+        onSuccess: onGoogleLoginSuccess,
+        onError: (error) => console.log('Login Failed:', error)
+    });
+
+    useEffect(
+        () => {
+            if (user) {
+                axios
+                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                        headers: {
+                            Authorization: `Bearer ${user.access_token}`,
+                            Accept: 'application/json'
+                        }
+                    })
+                    .then((res) => {
+                        setProfile(res.data.name);
+                        setUser(res.data);
+                        localStorage.setItem('profile', res.data.name);
+                    })
+                    .catch((err) => console.log(err));
+            }
+        },
+        [ user ]
+    );
+
+    // log out function to log the user out of google and set the profile array to null
+    const logOut = () => {
+        googleLogout();
+        setProfile(null);
+        setUser(null);
+        localStorage.removeItem('profile');
     };
+
 
     return (
         <AppBar
@@ -280,7 +317,15 @@ const Header = () => {
                             </Modal>
                         )
                     } */}
-                    <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+
+                    {profile ? (
+                            <>
+                            <p>Welcome, {profile}{' '} </p>
+                            <button onClick={logOut}>&nbsp;<u>Log out</u></button>
+                            </>
+                        ) : (
+                            <button onClick={() => login()}>Sign in with Google 🚀{' '}</button>
+                        )}
                 </Box>
             </Toolbar>
         </AppBar>

@@ -14,6 +14,21 @@ export default function CheckoutForm({ apiUrl }) {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const buttonStyle = {
+    backgroundColor: "#4CAF50",
+    color: "white",
+    padding: "14px 20px",
+    margin: "8px 0",
+    border: "none",
+    cursor: "pointer",
+    width: "100%",
+    borderRadius: "4px",
+  };
+  
+  const formStyle = {
+    paddingBottom: "50px",
+  };
+  
   useEffect(() => {
     if (!stripe) {
       return;
@@ -94,13 +109,13 @@ export default function CheckoutForm({ apiUrl }) {
   }
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+    <form id="payment-form" onSubmit={handleSubmit} style={formStyle}>
       <LinkAuthenticationElement
         id="link-authentication-element"
         onChange={(e) => setEmail(e.target.value)}
       />
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
+      <button disabled={isLoading || !stripe || !elements} id="submit" style={buttonStyle}>
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>

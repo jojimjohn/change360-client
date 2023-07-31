@@ -17,7 +17,7 @@ import {
   Avatar 
 } from "@mui/material";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import HeightRange from "./HeightRange";
 import WeightRange from "./WeightRange";
@@ -28,9 +28,11 @@ import * as constants from "./Constants";
 import ConfirmInfoOverlay from './ConfirmInfoOverlay';
 
 import backgroundLogo from '../../images/logo-semi-transparent.png';
+import { useAuth } from '../../utils/auth';
 
 const UserForm = ({ handleNext, closeModal }) => {    
-  const [name, setName] = useState("");
+  const { user } = useAuth();
+  const [name, setName] = useState(user?.name);
   const [gender, setGender] = useState("");
   const [age, setAge] = useState(25);
   const [height, setHeight] = useState(140);
@@ -134,6 +136,12 @@ const UserForm = ({ handleNext, closeModal }) => {
     setDailyActivity(value);
   }
 
+  useEffect( () => {
+    setName(user?.name ||  localStorage.getItem('profile'));
+
+  }, [user?.name,  localStorage.getItem('profile')]
+  );
+
     return (
     <>
       <Box sx={{ p: 2, width: { xl: '80%' } }} m="auto">
@@ -143,6 +151,7 @@ const UserForm = ({ handleNext, closeModal }) => {
             <TextField
               sx={{ width: 200 }}
               value={name}
+              defaultValue={user?.name || ''} 
               onChange={(e) => { setName(e.target.value); }}
               label="Name"
               variant="standard"

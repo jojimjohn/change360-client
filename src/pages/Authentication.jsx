@@ -1,58 +1,27 @@
-import { json, redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../utils/auth';
-
 import AuthForm from '../components/AuthForm';
 
 function AuthenticationPage() {
-  const { setUser } = useAuth();
+  const { setUser, authUser } = useAuth();
+  const navigate = useNavigate();
 
-  return <AuthForm />;
+  return <AuthForm onGoogleSignIn={signIn} />;
 }
 
 export default AuthenticationPage;
 
 export async function action({ request }) {
-  const { setUser } = useAuth();
-  const searchParams = new URL(request.url).searchParams;
-  const mode = searchParams.get('mode') || 'login';
+  const { setUser, authUser } = useAuth();
 
-  if (mode !== 'login' && mode !== 'signup') {
-    throw json({ message: 'Unsupported mode.' }, { status: 422 });
+  const id_token = request.headers.get('Authorization');
+  
+  if (!id_token) {
+    throw new Error('No authentication token provided.');
   }
 
-  const data = await request.formData();
-  const authData = {
-    email: data.get('email'),
-    password: data.get('password'),
-  };
-
-  const response = await fetch('http://localhost:5000/' + mode, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(authData),
-  });
-
-  if (response.status === 422 || response.status === 401) {
-    return response;
-  }
-
-  if (!response.ok) {
-    throw json({ message: 'Could not authenticate user.' }, { status: 500 });
-  }
-
-  const resData = await response.json();
-  const token = resData.token;
-
-  localStorage.setItem('token', token);
-  const expiration = new Date();
-  expiration.setHours(expiration.getHours() + 1);
-  localStorage.setItem('expiration', expiration.toISOString());
-
-  // Update the user state after successful authentication
-  const userId = resData.userId; // Replace this with the actual user ID field
-  setUser({ id: userId });
+  const user = await authUser({ id_token });
+  setUser(user);
 
   return redirect('/');
 }

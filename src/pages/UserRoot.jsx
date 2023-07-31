@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLoaderData, useNavigate } from 'react-router-dom';
 import { Box } from "@mui/material";
 
-import { checkAuthLoader, getTokenDuration } from '../utils/auth';
-import { useAuth } from '../utils/auth';
+import { AuthProvider, useAuth } from '../utils/auth';
 
 import FeedbackModal from "../components/feedback/FeedbackModal";
 import { RewardPointsProvider } from '../components/rewards/RewardsProvider';
@@ -23,24 +22,10 @@ const UserRootLayout = ({ apiUrl }) => {
     setSidebarOpen(!sidebarOpen);
   };
 
-
-  useEffect(() => {
-    checkAuthLoader();
-    const tokenDuration = getTokenDuration();
-    if (tokenDuration < 0) {
-     // handleDisconnect();
-     // navigate('/auth');
-    }
-    const timeout = setTimeout(() => {
-    //  handleDisconnect();
-   //   navigate('/auth');
-    }, tokenDuration);
-    return () => clearTimeout(timeout);
-  }, [token]);
-
   return (
     <>
     {/* <RewardPointsProvider userId={user} apiUrl={apiUrl}>       */}
+    <AuthProvider>
           <Header />
           <Sidebar />
           <Box
@@ -61,7 +46,7 @@ const UserRootLayout = ({ apiUrl }) => {
           </Box>
           <FeedbackModal userId={user} apiUrl={apiUrl} />
     {/* </RewardPointsProvider> */}
-    
+    </AuthProvider>  
     </>
   );
 };

@@ -7,32 +7,32 @@ import {
 } from "@mui/material";
 
 const UserSubscription = ({ userInfo, handleNext, apiUrl }) => {
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  //const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [hasEnoughCredits, setHasEnoughCredits] = useState(false);
 
   const [status, setStatus] = useState(null);
   const [error, setError] = useState(null);
 
   // checking if the wallet is connected
-  useEffect(() => {
-    const walletAddress = ''; //localStorage.getItem("address");
-    if (walletAddress) {
-      setIsWalletConnected(true);
-      // Fetch user details from your backend, using the address as the identifier
-      // fetch(`${apiUrl}/users?address=${walletAddress}`)
-      //   .then(res => res.json())
-      //   .then(data => {
-      //     setHasEnoughCredits(data.credits >= 3);
-      //     handleNext({
-      //       ...userInfo,
-      //       credits: data.credits,
-      //     });
-      //   })
-      //   .catch(err => console.error(err));
-    } else {
-      setIsWalletConnected(false);
-    }
-  }, [apiUrl, handleNext]);
+  // useEffect(() => {
+  // //  const walletAddress = ''; //localStorage.getItem("address");
+  //   if (walletAddress) {
+  //     setIsWalletConnected(true);
+  //     // Fetch user details from your backend, using the address as the identifier
+  //     // fetch(`${apiUrl}/users?address=${walletAddress}`)
+  //     //   .then(res => res.json())
+  //     //   .then(data => {
+  //     //     setHasEnoughCredits(data.credits >= 3);
+  //     //     handleNext({
+  //     //       ...userInfo,
+  //     //       credits: data.credits,
+  //     //     });
+  //     //   })
+  //     //   .catch(err => console.error(err));
+  //   } else {
+  //     setIsWalletConnected(false);
+  //   }
+  // }, [apiUrl, handleNext]);
 
   useEffect(() => {
  
@@ -66,9 +66,6 @@ const UserSubscription = ({ userInfo, handleNext, apiUrl }) => {
     }
   }, [userInfo]);
 
-  if (!isWalletConnected) {
-  //  return <AuthForm />;
-  }
 
   if (!hasEnoughCredits && status == 'success') {
     // Show Stripe payment page

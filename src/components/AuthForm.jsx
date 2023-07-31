@@ -1,47 +1,21 @@
 import React from 'react';
-import {
-  Form,
-  Link,
-  useSearchParams,
-  useActionData,
-  useNavigation,
-} from 'react-router-dom';
+import { useAuth } from '../utils/auth';
 
-import classes from './AuthForm.module.css';
-
-async function authenticate() {
-  // ...
-  localStorage.setItem("address", await signer.getAddress());
-  onAuthenticated(provider);
-}
-
-function disconnect() {
-  localStorage.removeItem("address");
-  setAddress(null);
-  onAuthenticated(null);
-}
-
-
-function AuthForm() {
-  const navigation = useNavigation();
-
-  const isSubmitting = navigation.state === 'submitting';
+const AuthForm = ({ onGoogleSignIn }) => {
+  const { user, signOut } = useAuth();
 
   return (
-    <>
-      <Form method="post" className={classes.form}>
-      {address ? (
+    <div>
+      {user ? (
         <div>
-          <p>Connected with address: {address}</p>
-          <button onClick={disconnect}>Disconnect Wallet</button>
-          {onClose && <button onClick={onClose}>Close</button>}
+          <h2>Welcome, {user.name}</h2>
+          <button onClick={signOut}>Logout</button>
         </div>
       ) : (
-        <button onClick={authenticate}>Connect Wallet</button>
+        <button onClick={onGoogleSignIn}>Login with Google</button>
       )}
-      </Form>
-    </>
+    </div>
   );
-}
+};
 
 export default AuthForm;
