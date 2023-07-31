@@ -77,7 +77,7 @@ function Header() {
             {/* Desktop sign in links */}
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
-                <Link to="/user" className="btn-sm text-white bg-primary-600 hover:bg-primary-700 ml-3">ENTER APP</Link>
+                <Link to="/user/newplan" className="btn-sm text-white bg-primary-600 hover:bg-primary-700 ml-3">ENTER APP</Link>
               </li>
             </ul>
 
