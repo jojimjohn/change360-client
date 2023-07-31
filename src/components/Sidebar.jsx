@@ -79,7 +79,7 @@ const Sidebar = () => {
             icon={<MenuBookIcon />}
             text="Subscription"
           />
-          <SidebarMenuItem
+          {/* <SidebarMenuItem
             to="/user/rewards"
             icon={<RedeemIcon />}
             text="Rewards"
@@ -88,7 +88,7 @@ const Sidebar = () => {
             to="/user/faq"
             icon={<LiveHelpIcon />}
             text="FAQ"
-          />
+          /> */}
         </>
       );
 
