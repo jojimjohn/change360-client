@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { TextField, Box, Grid, Slider, Typography } from "@mui/material";
 
 const SlidingRange = (props) => {
-  const [value, setValue] = useState(25);
+  const { error } = props;
+  const [value, setValue] = useState(null);
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
     props.getAge(newValue);
@@ -24,15 +25,17 @@ const SlidingRange = (props) => {
     }
   };
 
+  const hideLabel = value !== null || (value === "" && document.activeElement !== document.getElementById("input-slider"));
+
   return (
     <Box sx={{ width: 230 }}>
-      <Typography id="input-slider" gutterBottom>
+      <Typography id="input-slider" gutterBottom style={{ display: hideLabel ? "none" : "block" }}>
         Age
       </Typography>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs>
           <Slider
-            value={value}
+            value={value === null ? "" : value}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
             step={1}
@@ -45,7 +48,7 @@ const SlidingRange = (props) => {
           <TextField
             sx={{ width: 50 }}
             type="number"
-            value={value}
+            value={value === null ? "" : value}
             onChange={handleInputChange}
             onBlur={handleBlur}
             label="Age"
@@ -57,6 +60,8 @@ const SlidingRange = (props) => {
               type: "number",
               "aria-labelledby": "input-slider",
             }}
+            error={error}
+            helperText={error && 'Please fill out this field'}
           />
         </Grid>
       </Grid>

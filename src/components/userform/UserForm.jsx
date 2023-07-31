@@ -34,10 +34,10 @@ const UserForm = ({ handleNext, closeModal }) => {
   const { user } = useAuth();
   const [name, setName] = useState(user?.name);
   const [gender, setGender] = useState("");
-  const [age, setAge] = useState(25);
-  const [height, setHeight] = useState(140);
+  const [age, setAge] = useState(null);
+  const [height, setHeight] = useState(null);
   const [heightUnit, setHeightUnit] = useState("");
-  const [weight, setWeight] = useState("");
+  const [weight, setWeight] = useState(null);
   const [weightUnit, setWeightUnit] = useState("");
   const [curFitnessLevel, setCurFitnessLevel] = useState("");
   const [curFitnessGoal, setCurFitnessGoal] = useState("");
@@ -50,6 +50,7 @@ const UserForm = ({ handleNext, closeModal }) => {
 
   const [nameError, setNameError] = useState(false);
   const [genderError, setGenderError] = useState(false);
+  const [ageError, setAgeError] = useState(false);
   const [heightError, setHeightError] = useState(false);
   const [weightError, setWeightError] = useState(false);
   const [curFitnessLevelError, setCurFitnessLevelError] = useState(false);
@@ -61,9 +62,10 @@ const UserForm = ({ handleNext, closeModal }) => {
     event.preventDefault();
 
     // Check if any required fields are empty
-    if (!name || !gender || !height || !weight || !curFitnessLevel || !curFitnessGoal || !curExercise || !dailyActivity) {
+    if (!name || !age || !gender || !height || !weight || !curFitnessLevel || !curFitnessGoal || !curExercise || !dailyActivity) {
       // Set error messages for the empty fields
       setNameError(!name);
+      setAgeError(!age);
       setGenderError(!gender);
       setHeightError(!height);
       setWeightError(!weight);
@@ -182,9 +184,20 @@ const UserForm = ({ handleNext, closeModal }) => {
                 </Typography>
               )}
             </Grid>
-            <SlidingRange getAge={getAge} />
-            <HeightRange getHeightUnit={getHeightUnit} getHeight={getHeight} />
-            <WeightRange getWeightUnit={getWeightUnit} getWeight={getWeight} />
+            <SlidingRange
+              getAge={getAge}
+              error={ageError}
+            />
+            <HeightRange
+              getHeightUnit={getHeightUnit}
+              getHeight={getHeight}
+              error={heightError}
+            />
+            <WeightRange
+              getWeightUnit={getWeightUnit}
+              getWeight={getWeight}
+              error={weightError}
+            />
             <DropdownList
               getOption={getCurFitnessLevel}
               placeholder="What is your current fitness level?"
