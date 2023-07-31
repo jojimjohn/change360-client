@@ -282,8 +282,9 @@ const DisplayMealPlan = ({userInfo, handleNext, apiUrl}) => {
                                                         </Link>
                                                     </Box>
                                                 )
-                                            } < />
-  )}
+                                            } </>
+                                          ) }
+
                                 </CardContent>
                             </Card>
 
