@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 //import {WalletProvider} from "./components/walletconnect/WalletContext";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {ethers} from 'ethers';
+import { AuthProvider} from './utils/auth';
 
 import App from './App';
 
@@ -35,9 +36,11 @@ root.render(
     <GoogleOAuthProvider clientId="269939431372-bc5fjp3q6ersnkt8g0bdb9e8pvfpr21s.apps.googleusercontent.com">
     {/* <Web3ReactProvider getLibrary={getLibrary}> */}
         {/* <WalletProvider> */}
+        <AuthProvider>
             <ThemeProvider theme={darkTheme}>
                 <App/>
             </ThemeProvider>
+        </AuthProvider>
         {/* </WalletProvider> */}
     {/* </Web3ReactProvider> */}
     </GoogleOAuthProvider>

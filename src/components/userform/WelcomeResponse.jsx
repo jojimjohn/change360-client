@@ -70,8 +70,7 @@ const WelcomeResponse = ({ userId, handleNext, apiUrl  }) => {
   }, [userId]);
 
   return (
-    <Box className="relative max-w-6xl mx-auto h-0" textAlign='center' m="auto">
-      <Typography variant="h5" className="text-center">Step 2: Welcome Response</Typography>
+    <Box className="relative max-w-6xl mx-auto" textAlign='center' m="auto" sx={{ pt: 2, pb: 2 }}>
       <Box component="form" onSubmit={submitHandler} sx={{ mt: 2 }}>
        
       {isLoading || response != null || error != null? (

@@ -2,7 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../utils/auth';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Chip, Avatar } from '@mui/material';
 
 import logo from '../images/logo.png';
 
@@ -38,6 +40,8 @@ const Header = () => {
     //     shortenAddress
     // } = useWallet();
 
+    const navigate = useNavigate();
+
     const [modalOpen, setModalOpen] = useState(false);
 
     const handleModalOpen = () => {
@@ -60,11 +64,11 @@ const Header = () => {
         p: 4
     };
 
-    const { user, setUser, signOut } = useAuth();
-    const [ profile, setProfile ] = useState( localStorage.getItem('profile'));
+    const { user, profile, setUser, signOut, signIn} = useAuth();
 
+    console.log(user);
     const onGoogleLoginSuccess = async (googleResponse) => {
-        setUser(googleResponse);
+        signIn(googleResponse); 
     };
     
       
@@ -73,33 +77,14 @@ const Header = () => {
         onError: (error) => console.log('Login Failed:', error)
     });
 
-    useEffect(
-        () => {
-            if (user) {
-                axios
-                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
-                        headers: {
-                            Authorization: `Bearer ${user.access_token}`,
-                            Accept: 'application/json'
-                        }
-                    })
-                    .then((res) => {
-                        setProfile(res.data.name);
-                        setUser(res.data);
-                        localStorage.setItem('profile', res.data.name);
-                    })
-                    .catch((err) => console.log(err));
-            }
-        },
-        [ user ]
-    );
-
     // log out function to log the user out of google and set the profile array to null
     const logOut = () => {
-        googleLogout();
-        setProfile(null);
-        setUser(null);
-        localStorage.removeItem('profile');
+        // googleLogout();
+        // setProfile(null);
+        // setUser(null);
+        // localStorage.removeItem('profile');
+        signOut();
+        navigate('/');
     };
 
 
@@ -318,10 +303,15 @@ const Header = () => {
                         )
                     } */}
 
-                    {profile ? (
+                    {user ? (
                             <>
-                            <p>Welcome, {profile}{' '} </p>
-                            <button onClick={logOut}>&nbsp;<u>Log out</u></button>
+                            <Chip
+                            avatar={<Avatar alt="Natacha" src={user.picture} />}
+                            label={<>{profile} &nbsp;<button onClick={logOut}><u>Log out</u></button></>}
+                            variant="outlined"
+                            /> 
+
+                            
                             </>
                         ) : (
                             <button onClick={() => login()}>Sign in with Google 🚀{' '}</button>

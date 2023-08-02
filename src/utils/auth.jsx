@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { redirect } from 'react-router-dom';
 import { useWallet } from "../components/walletconnect/WalletContext";
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 const AuthContext = createContext(null);
 
@@ -12,18 +13,49 @@ const useWalletAddress = () => {
 
 export const AuthProvider = ({ children }) => {
 //  const walletAddress = useWalletAddress();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('');
+  const [profile, setProfile] = useState(localStorage.getItem('profile'));
 
   const [token, setToken] = useState(() => {
     const storedToken = localStorage.getItem('token');
     return storedToken;
   });
 
-  const  signOut = googleLogout({
+  useEffect(() => {
+    // Listen for storage changes
+    const handleStorageChange = () => {
+      setProfile(localStorage.getItem('profile'));
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  const signIn = (newUser) => {
+    axios
+    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${newUser.access_token}`, {
+        headers: {
+            Authorization: `Bearer ${newUser.access_token}`,
+            Accept: 'application/json'
+        }
+    })
+    .then((res) => {
+        setProfile(res.data.given_name);
+        setUser(res.data);
+        localStorage.setItem('profile', res.data.given_name);
+    })
+    .catch((err) => console.log(err));
+    
+  };
+
+  const  signOut = () => googleLogout({
     onSuccess: () => {
       setUser(null);
       localStorage.removeItem('token');
       localStorage.removeItem('profile'); 
+      //return redirect('/');
     },
   });
 
@@ -67,7 +99,7 @@ export const AuthProvider = ({ children }) => {
 
 
   return (
-     <AuthContext.Provider value={{ user, setUser, signOut }}>
+     <AuthContext.Provider value={{ user, profile, setUser, signOut, signIn }}>
       {children}
     </AuthContext.Provider>
   );

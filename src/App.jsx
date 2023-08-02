@@ -43,7 +43,7 @@ import AuthenticationPage, {
   action as authAction,
 } from './pages/Authentication';
 import { action as logoutAction } from './pages/Logout';
-import { AuthProvider} from './utils/auth';
+
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -60,9 +60,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <AuthProvider>
          <RootLayout />
-      </AuthProvider>
     ), 
     errorElement: <ErrorPage />,
     id: 'root',
@@ -72,9 +70,7 @@ const router = createBrowserRouter([
         path: 'user',
         id: 'user',
         element: (
-          <AuthProvider>
              <UserRootLayout apiUrl={apiUrl} />
-          </AuthProvider>
         ), 
         children: [
           {
@@ -167,50 +163,3 @@ function App() {
 }
 
 export default App;
-
-
-// const App = () => {
-  
-//   const token = localStorage.getItem('token');
-  
-
-//   return (
-//     <Box width="400px" sx={{ width: { xl: '100%' }, minHeight: { xl: '400px'} }} m="auto">
-//       <Fragment>
-//         <Header />
-//         <ErrorBoundary>
-//           {/* <Routes>
-//             <Route exact path='/' element={<PrivateRoute/>}>
-//               <Route path='/' element={<Dashboard/>}/>
-//             </Route>
-//             <Route exact path='/login' element={<WelcomeScreen/>}/>
-//             <Route path="*" element={<NotFound />} />
-//           </Routes> */}
-//           <Routes>
-//           {token ? (
-//               <Route path="/" element={<Dashboard />} />
-//             ) : (
-//               <Route path="/" element={<WelcomeScreen />} />
-//             )}
-//             <Route path="/payment" element={<Payment />}  />
-//             <Route path="/mealplan" element={<NewPlan />} />
-//             <Route path="/planinfo" element={<PlanInfo />} />
-//             <Route path="/userform" element={<GeneralInfoForm />}  />
-//             <Route path="/dietinfoform/:userId" element={<ProvideDietInfo />} />
-//             <Route path="/upgradeplan/:userId" element={<UpgradePlan />} />
-//             <Route path="/additionalplan/:userId" element={<AdditionalPlan />} />
-//             <Route path="/login" element={<WelcomeScreen />} />
-//             <Route path="/logout" element={<Logout />} />
-//             <Route path="*" element={<NotFound />} />
-//           </Routes>
-//         </ErrorBoundary>
-//        <Footer />
-//       </Fragment>
-   
-
-
-//     </Box>
-//   );
-// };
-
-// export default App;

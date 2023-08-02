@@ -72,12 +72,12 @@ const Sidebar = () => {
           <SidebarMenuItem
             to="/user/newplan"
             icon={<DashboardIcon />}
-            text="Meal Plan"
+            text="Plan Subscription"
           />
           <SidebarMenuItem
             to="/user/plans"
             icon={<MenuBookIcon />}
-            text="Subscription"
+            text="Your Meal Plan"
           />
           {/* <SidebarMenuItem
             to="/user/rewards"

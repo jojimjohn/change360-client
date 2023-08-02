@@ -118,117 +118,61 @@ function updatePaymentIntent(plan) {
   };
 
   return (
+<Container maxWidth="lg" sx={{ marginTop: '10px' }}>
+  <Typography variant="h4" gutterBottom>
+    Meal Plans 
+  </Typography>
+  <Grid container spacing={3}>
+    {/* Meal Plans Section */}
+    <Grid item xs={12} sm={6} sx={{minHeight: '30vh'}}> 
 
-    <Container maxWidth="lg" sx={{ marginTop: '100px' }}>
-    <Typography variant="h4" gutterBottom>
-      Meal Plans 
-    </Typography>
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        {mealPlan ? (
-          <>
-            <Typography variant="h8" gutterBottom className="text-left" style={{ marginBottom: '30px' }}>
-              Welcome back! We're glad to see you again. Your commitment to improving your nutrition and following your meal plan is commendable. Let's discuss your progress and any challenges you've faced since our last conversation. We're here to support and guide you as you continue on your journey to better health and well-being.
-            </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <Box sx={{ mb: 3 }} style={{ marginTop: '30px' }}>
-                  <UserInteract address={userId} apiUrl={apiUrl} />
-                </Box>
-              </Grid>
-            </Grid>
-            {/* TODO: display the user's meal and nutrition plans */}
-          </>
-        ) : (
-          <Grid item xs={12} sx={{minHeight: '30vh'}}>
-          <>
-            <Typography variant="h6" gutterBottom>
-              Purchase a Meal and Nutrition Plan
-            </Typography>
-            <Box sx={{ mb: 3 }}>
-              <Typography variant="body1" gutterBottom>
-                Purchase a new meal plan now to get started on your health journey.
-              </Typography>
-            </Box>
-
-            <Grid container spacing={1} justify="center">
-            {/* <Grid item xs={3}>
-              <Box bgcolor="#ccc" display="flex" flexDirection="column" justifyContent="space-between" alignItems="center" p={2} borderRadius={2} style={{ cursor: 'pointer', width: '150px', height: '200px' }} onClick={() => setPaymentOption('crypto')}>
-                <img 
-                  src={walletimg}
-                  width="150"
-                  alt="Pay with Crypto" 
-                />
-                <Typography variant="body1" style={{ marginTop: '10px', color:'black' }}>
-                  Pay with Crypto
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={3}>
-              <Box bgcolor="#ccc" display="flex" flexDirection="column" justifyContent="space-between" alignItems="center" p={2} borderRadius={2} style={{ cursor: 'pointer', width: '150px', height: '200px' }} onClick={() => setPaymentOption('card')}>
-                <img 
-                  src={cardimg}
-                  width="180"
-                  alt="Pay with Card" 
-                />
-                <Typography variant="body1" style={{ marginTop: '10px', color:'black' }}>
-                  Pay with Card
-                </Typography>
-              </Box>
-            </Grid> */}
-
-          {/* Plans */}
-          <div className="max-w-sm mx-auto grid gap-8 lg:grid-cols-3 lg:gap-6 items-start lg:max-w-none">
-
-          {/* 1st plan */}
-          <div className="flex flex-col h-full p-6" data-aos="fade-up">
-            <div>
-              <div className="relative inline-flex flex-col mb-4">
-                <div className="plan">
-                  <ul className="plan-list">
-                    <li className="plan-header">Meal Plan</li>
-                    <li className="bg-gray-900">$9.99 </li>
-                    <li>With our Pro plan, you can take your fitness to the next level</li>
-                    <li className="bg-gray-800">
+      <Grid container spacing={1} justify="center">
+        {/* 1st plan */}
+        <Grid item xs={12}>
+          <Box sx={{ p: 6 }}>
+            <div className="relative inline-flex flex-col mb-4">
+              <div className="plan">
+                <ul className="plan-list">
+                  <li className="plan-header">Meal Plan</li>
+                  <li className="bg-gray-900">$9.99 </li>
+                  <li>With our Pro plan, you can take your fitness to the next level</li>
+                  <li className="bg-gray-800">
                     <button className="btn text-white bg-primary-600 hover:bg-primary-700 w-full mb-4 sm:w-auto sm:mb-0 plan-button" onClick={() => selectPlan({ name: 'One time', amount: 999 })}>
-  Subscribe<br/>$9.99
-</button>
-                    </li>
-                  </ul>
-                </div>
+                      Subscribe<br/>$9.99
+                    </button>
+                  </li>
+                </ul>
               </div>
             </div>
-          </div>
-   
-
-          </div>
-
-          </Grid>
-
-
-            {paymentOption === 'crypto' && (
-              <Box sx={{ mt: 3 }}>
-                <Button variant="contained" color="primary" onClick={handlePurchasePlan}>
-                  Buy Now
-                </Button>
-              </Box>
-            )}
-            {paymentOption === 'card' && clientSecret && (
-              <Box sx={{ mt: 3 }}>
-                <Elements options={options} stripe={stripePromise}>
-                  <CheckoutForm apiUrl={apiUrl} clientSecret={clientSecret} />
-                </Elements>
-              </Box>
-            )}
-          </>
+          </Box>
         </Grid>
-        )}
       </Grid>
+    </Grid>
 
-    
+    {/* Checkout Form Section */}
+    <Grid item xs={12} sm={6}>
+      {paymentOption === 'crypto' && (
+        <Box sx={{ mt: 3 }}>
+          <Button variant="contained" color="primary" onClick={handlePurchasePlan}>
+            Buy Now
+          </Button>
+        </Box>
+      )}
+      {paymentOption === 'card' && clientSecret && (
+        <Box sx={{ mt: 3 }}>
+          <Elements options={options} stripe={stripePromise}>
+            <CheckoutForm apiUrl={apiUrl} clientSecret={clientSecret} />
+          </Elements>
+        </Box>
+      )}
+    </Grid>
+  </Grid>
+</Container>
 
-      </Grid>
-  </Container>
+
+
+
+   
 
    
   );

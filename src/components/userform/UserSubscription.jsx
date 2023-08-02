@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Button } from '@mui/material';
 import StripePaymentPage from '../../pages/PlanInfo';
 import AuthForm from '../AuthForm';
+import { useAuth } from '../../utils/auth';
 import {
   Typography,
 } from "@mui/material";
@@ -9,9 +10,10 @@ import {
 const UserSubscription = ({ userInfo, handleNext, apiUrl }) => {
   //const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [hasEnoughCredits, setHasEnoughCredits] = useState(false);
-
   const [status, setStatus] = useState(null);
   const [error, setError] = useState(null);
+  const { user} = useAuth();
+
 
   // checking if the wallet is connected
   // useEffect(() => {
@@ -34,49 +36,47 @@ const UserSubscription = ({ userInfo, handleNext, apiUrl }) => {
   //   }
   // }, [apiUrl, handleNext]);
 
-  useEffect(() => {
+  // useEffect(() => {
  
-    if (userInfo) {
-      const fetchData = async () => {
-        try {
-            const response = await fetch(`${apiUrl}/users`, {
-              method: 'POST',
-              body: userInfo,
-              headers: { 'Content-Type': 'application/json' },
-            });
+  //   if (user) {
+  //     const fetchData = async () => {
+  //       try {
+  //           const response = await fetch(`${apiUrl}/users`, {
+  //             method: 'POST',
+  //             body: userInfo,
+  //             headers: { 'Content-Type': 'application/json' },
+  //           });
         
-            if (!response.ok) {
-                throw new Error(`Something went wrong. Please check if you have entered your information correctly and try again. ${<Link to="/user" style={{ textDecoration: 'none', color: '#FFF' }}>Reload this page.</Link>}`);
+  //           if (!response.ok) {
+  //               throw new Error(`Something went wrong. Please check if you have entered your information correctly and try again. ${<Link to="/user" style={{ textDecoration: 'none', color: '#FFF' }}>Reload this page.</Link>}`);
 
-              return;
-            }
+  //             return;
+  //           }
         
-            const planData = await response.json();
-           // console.log(planData);
-            setStatus(planData.status);
-            setError(null);
-        
+  //           const planData = await response.json();
+  //           setStatus(planData.status);
+  //           setError(null);
+  //           // If the user is authenticated, set the profile state
+  //           if(planData.user) {
+  //               setProfile(planData.user); 
+  //           }
        
-          } catch (error) {
-                setError(error.message);
-            }
+  //         } catch (error) {
+  //               setError(error.message);
+  //           }
 
-      };
-      fetchData();
-    }
-  }, [userInfo]);
+  //     };
+  //     fetchData();
+  //   }
+  // }, [user]);
 
-
-  if (!hasEnoughCredits && status == 'success') {
-    // Show Stripe payment page
+  if (error) {
+    return <Typography color="error">{error}</Typography>;
+  } else if (user) {
     return <StripePaymentPage apiUrl={apiUrl} />;
+  } else {
+    return <AuthForm />;
   }
-
-  return (
-     <>
-      {error && <Typography color="error">{error}</Typography>}
-    </>
-  )
 
  };
 
