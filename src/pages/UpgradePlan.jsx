@@ -9,7 +9,7 @@ const UpgradePlan = () => {
     const success = true;
 
     if (success) {
-      // Redirect to additional days meal plan page
+      // Redirect to additional days Personalized Exercise and Nutrition Plan page
      
     } else {
       alert('Payment failed. Please try again.');
@@ -19,9 +19,9 @@ const UpgradePlan = () => {
   return (
     <>
       <Box sx={{ p: 2 }}>
-        <Typography variant="h5">Upgrade to 2 Additional Days Meal Plan</Typography>
+        <Typography variant="h5">Upgrade to 2 Additional Days Personalized Exercise and Nutrition Plan</Typography>
         <Typography variant="subtitle1" color="text.secondary">
-          Get an additional 2-day meal plan for only $5
+          Get an additional 2-day Personalized Exercise and Nutrition Plan for only $5
         </Typography>
         <Box sx={{ mt: 2 }}>
           <Button variant="contained" color="primary" onClick={handleUpgrade} href="/additionalplan">

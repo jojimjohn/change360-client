@@ -18,7 +18,7 @@ import {Link} from "react-router-dom";
 const DisplayMealPlan = ({userInfo, handleNext, apiUrl}) => {
 
     // useEffect(() => {
-    //     addRewardPoints('Meal Plan', 20);
+    //     addRewardPoints('Personalized Exercise and Nutrition Plan', 20);
     // }, []);
 
     const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +39,7 @@ const DisplayMealPlan = ({userInfo, handleNext, apiUrl}) => {
 
                 try {
                     // Send a POST request to the backend to save the user's dietary information Get
-                    // the meal plan from the OpenAI API
+                    // the Personalized Exercise and Nutrition Plan from the OpenAI API
                     const response = await fetch(`${apiUrl}/nutrition`, {
                         method: 'POST',
                         body: userInfo,
@@ -189,7 +189,7 @@ const DisplayMealPlan = ({userInfo, handleNext, apiUrl}) => {
                 }
             }}
             m="auto">
-            <Typography variant="h5">Result: Your Meal Plan</Typography>
+            <Typography variant="h5">Result: Your Personalized Exercise and Nutrition Plan</Typography>
             <Box
                 component="form"
                 onSubmit={submitHandler}
@@ -235,7 +235,7 @@ const DisplayMealPlan = ({userInfo, handleNext, apiUrl}) => {
                                                 10
                                             }
                                             width = "80%" style = {{ marginBottom: 6 }}
-                                            /><Typography variant="h6">Change 360: We are generating your meal plan</Typography > </>
+                                            /><Typography variant="h6">Change 360: We are generating your Personalized Exercise and Nutrition Plan</Typography > </>
                                         )
                                         : (<Typography variant="h6">Change 360</Typography>)}/>
 
@@ -267,7 +267,7 @@ const DisplayMealPlan = ({userInfo, handleNext, apiUrl}) => {
                                                             mt: 2
                                                         }}>
                                                         <Typography variant="h6" gutterBottom="gutterBottom">
-                                                            Hi {response.name}, here is your personalized meal plan.
+                                                            Hi {response.name}, here is your Personalized Exercise and Nutrition Plan.
                                                         </Typography>
                                                         {formatMessage(response.message)}
                                                         <Link
@@ -277,7 +277,7 @@ const DisplayMealPlan = ({userInfo, handleNext, apiUrl}) => {
                                                                 marginTop: 10
                                                             }}>
                                                             <Button variant="contained" color="primary">
-                                                                Upgrade to additional 2-Day Meal Plan
+                                                                Upgrade to additional 2-Day Personalized Exercise and Nutrition Plan
                                                             </Button>
                                                         </Link>
                                                     </Box>

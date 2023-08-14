@@ -77,7 +77,7 @@ const Sidebar = () => {
           <SidebarMenuItem
             to="/user/plans"
             icon={<MenuBookIcon />}
-            text="Your Meal Plan"
+            text="Your Plan"
           />
           {/* <SidebarMenuItem
             to="/user/rewards"

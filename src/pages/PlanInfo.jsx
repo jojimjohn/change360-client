@@ -63,7 +63,7 @@ function createPaymentIntent(plan) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
             items: [{ id: "mealplan" }], 
-            description: `Meal Plan - ${plan.name}`, 
+            description: `Personalized Exercise and Nutrition Plan - ${plan.name}`, 
             amount: plan.amount // Pass plan's amount to the server
         }),
     })
@@ -86,7 +86,7 @@ function updatePaymentIntent(plan) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
           id: existingPaymentIntentId, 
-          description: `Meal Plan - ${plan.name}`, 
+          description: `Personalized Exercise and Nutrition Plan - ${plan.name}`, 
           amount: plan.amount 
       }),
   })
@@ -120,10 +120,10 @@ function updatePaymentIntent(plan) {
   return (
 <Container maxWidth="lg" sx={{ marginTop: '10px' }}>
   <Typography variant="h4" gutterBottom>
-    Meal Plans 
+    Personalized Exercise and Nutrition Plans 
   </Typography>
   <Grid container spacing={3}>
-    {/* Meal Plans Section */}
+    {/* Personalized Exercise and Nutrition Plans Section */}
     <Grid item xs={12} sm={6} sx={{minHeight: '30vh'}}> 
 
       <Grid container spacing={1} justify="center">
@@ -133,7 +133,7 @@ function updatePaymentIntent(plan) {
             <div className="relative inline-flex flex-col mb-4">
               <div className="plan">
                 <ul className="plan-list">
-                  <li className="plan-header">Meal Plan</li>
+                  <li className="plan-header">Personalized Exercise and Nutrition Plan</li>
                   <li className="bg-gray-900">$9.99 </li>
                   <li>With our Pro plan, you can take your fitness to the next level</li>
                   <li className="bg-gray-800">

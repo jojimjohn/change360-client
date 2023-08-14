@@ -10,27 +10,27 @@ import DisplayMealPlan from '../components/userform/DisplayMealPlan';
 
 //import { RewardPointsProvider } from '../components/rewards/RewardsProvider';
 
-//const steps = ['General Information', 'Plan Subscription', 'Welcome Response', 'Dietary Information', 'Your Meal Plan'];
+//const steps = ['General Information', 'Plan Subscription', 'Welcome Response', 'Dietary Information', 'Your Personalized Exercise and Nutrition Plan'];
 const steps = [
   {
     label: 'General Information',
     description: 'In this step, we will gather some basic information about you to personalize your CHANGE360 experience. This will help us provide you with the best possible health and fitness recommendations.',
   },
   {
-    label: 'Create a CHANGE360 account & subscribe to a Meal Plan',
-    description: 'Next, you will create a CHANGE360 account and subscribe to a meal plan. You will get a 7 day free trial, please enter your billing information. There is no small text, no commitment, and you can cancel anytime.',
+    label: 'Create a CHANGE360 account & subscribe to a Personalized Exercise and Nutrition Plan',
+    description: 'Next, you will create a CHANGE360 account and subscribe to a Personalized Exercise and Nutrition Plan. You will get a 7 day free trial, please enter your billing information. There is no commitment, and you can cancel anytime.',
   },
   {
     label: 'Welcome Response',
-    description: 'Thank you for subscribing to a meal plan, you will receive a welcome message with further instructions. Follow the guidelines provided to ensure the most effective use of your meal plan.',
+    description: 'Thank you for subscribing to a Personalized Exercise and Nutrition Plan, you will receive a welcome message with further instructions. Follow the guidelines provided to ensure the most effective use of your Personalized Exercise and Nutrition Plan.',
   },
   {
     label: 'Dietary Information',
-    description: 'In this step, we will gather more detailed information about your dietary preferences and restrictions. This information will be used to personalize your meal plan and ensure it aligns with your dietary needs.',
+    description: 'In this step, we will gather more detailed information about your dietary preferences and restrictions. This information will be used to personalize your Personalized Exercise and Nutrition Plan and ensure it aligns with your dietary needs.',
   },
   {
-    label: 'Your Meal Plan',
-    description: 'Now you will receive your personalized meal plan! It has been crafted based on the information you provided in the previous steps. Follow this meal plan to start seeing improvements in your health and fitness.',
+    label: 'Your Personalized Exercise and Nutrition Plan',
+    description: 'Now you will receive your personalized Personalized Exercise and Nutrition Plan! It has been crafted based on the information you provided in the previous steps. Follow this Personalized Exercise and Nutrition Plan to start seeing improvements in your health and fitness.',
   },
 ];
 

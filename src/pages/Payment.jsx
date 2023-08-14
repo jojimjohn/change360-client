@@ -20,7 +20,7 @@ const Payment = () => {
         </Box>
         <Box sx={{ mt: 2 }}>
           <Button variant="contained" color="primary" size="large" href="/mealplan/new">
-            Generate Meal Plan
+            Generate Personalized Exercise and Nutrition Plan
           </Button>
         </Box>
       </Box>

@@ -19,7 +19,7 @@ const AdditionalPlan = () => {
     <>
       <Header />
       <Box sx={{ p: 2 }}>
-        <Typography variant="h5">Additional 2-Day Meal Plan</Typography>
+        <Typography variant="h5">Additional 2-Day Personalized Exercise and Nutrition Plan</Typography>
         <Typography variant="body1">{mealPlan}</Typography>
       </Box>
       <Footer />
